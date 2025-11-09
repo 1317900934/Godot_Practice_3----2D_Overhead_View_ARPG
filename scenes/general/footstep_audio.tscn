@@ -1,0 +1,19 @@
+[gd_scene load_steps=6 format=3 uid="uid://c8tdwpel57dvt"]
+
+[ext_resource type="Script" uid="uid://cro008rgjegrl" path="res://scenes/general/footstep_audio.gd" id="1_ltgih"]
+[ext_resource type="AudioStream" uid="uid://chwb84pbu7sxq" path="res://assets/audio/footsteps_sfx/footstep_03.wav" id="1_p15fg"]
+[ext_resource type="AudioStream" uid="uid://busrcgqsx6c53" path="res://assets/audio/footsteps_sfx/footstep_02.wav" id="3_bfvlo"]
+[ext_resource type="AudioStream" uid="uid://c7tnmwxl7twki" path="res://assets/audio/footsteps_sfx/footstep_01.wav" id="4_dmnsb"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bfvlo"]
+playback_mode = 1
+random_pitch = 1.2
+random_volume_offset_db = 1.0
+streams_count = 1
+
+[node name="Footstep_Audio" type="AudioStreamPlayer2D"]
+stream = SubResource("AudioStreamRandomizer_bfvlo")
+volume_db = -12.0
+bus = &"SFX"
+script = ExtResource("1_ltgih")
+footstep_sfx = Array[AudioStream]([ExtResource("1_p15fg"), ExtResource("3_bfvlo"), ExtResource("4_dmnsb")])

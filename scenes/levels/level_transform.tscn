@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmrmno36abhdr"]
+
+[ext_resource type="Script" uid="uid://cvg765bwg1wvm" path="res://scenes/levels/scripts/level_transform.gd" id="1_3hwe7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2smdx"]
+resource_local_to_scene = true
+size = Vector2(32, 32)
+
+[node name="Level_Transform" type="Area2D"]
+collision_layer = 0
+script = ExtResource("1_3hwe7")
+target_transform_area = "Level_Transform_Area"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_2smdx")
+debug_color = Color(0.799946, 0.130399, 0.959642, 0.42)

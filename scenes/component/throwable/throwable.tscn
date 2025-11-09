@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://p2qo0n7hdbl"]
+
+[ext_resource type="Script" uid="uid://bjf2b7p82c467" path="res://scenes/component/throwable/throwable.gd" id="1_krg8n"]
+[ext_resource type="PackedScene" uid="uid://uj0q32mxoiqp" path="res://scenes/component/hit_box/hit_box.tscn" id="2_nd1d5"]
+
+[node name="Throwable" type="Area2D"]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+script = ExtResource("1_krg8n")
+
+[node name="Hit_Box" parent="." instance=ExtResource("2_nd1d5")]
+damage = 5
+
+[node name="Wall_Detect" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="NPC_Resource" load_steps=4 format=3 uid="uid://dyxu1ojjur15"]
+
+[ext_resource type="Texture2D" uid="uid://dy7hlkbx40phj" path="res://assets/npc_and_dialog/sprites/portraits/npc_portrait_01.png" id="1_t4tx7"]
+[ext_resource type="Script" uid="uid://b83y62gbulofv" path="res://scenes/npcs/npc_resource.gd" id="2_qv3cc"]
+[ext_resource type="Texture2D" uid="uid://7na0j37kk0tr" path="res://assets/npc_and_dialog/sprites/npc_sprite.png" id="3_xgabp"]
+
+[resource]
+script = ExtResource("2_qv3cc")
+npc_name = "老大哥"
+sprite = ExtResource("3_xgabp")
+portrait = ExtResource("1_t4tx7")
+dialog_audio_pitch = 0.8
+metadata/_custom_type_script = "uid://b83y62gbulofv"

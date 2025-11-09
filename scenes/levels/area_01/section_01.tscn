@@ -1,0 +1,463 @@
+[gd_scene load_steps=29 format=4 uid="uid://b87psvp2dtgb"]
+
+[ext_resource type="Script" uid="uid://bqqtoy1obei71" path="res://scenes/levels/scripts/level.gd" id="1_0y4hu"]
+[ext_resource type="PackedScene" uid="uid://cm0cg64vb4rsq" path="res://scenes/tilemaps/grass_01.tscn" id="2_uly6q"]
+[ext_resource type="PackedScene" uid="uid://do8omoyunbmyw" path="res://scenes/levels/player_spawn.tscn" id="3_ejlmb"]
+[ext_resource type="PackedScene" uid="uid://cv6mtfbwgy41e" path="res://scenes/tilemaps/shop_tilemap.tscn" id="4_13pdc"]
+[ext_resource type="PackedScene" uid="uid://bmrmno36abhdr" path="res://scenes/levels/level_transform.tscn" id="4_uly6q"]
+[ext_resource type="PackedScene" uid="uid://ba18nawb87xwb" path="res://items/item_pickup/item_pickup.tscn" id="5_qim7c"]
+[ext_resource type="PackedScene" uid="uid://c7vwbatjjoipy" path="res://scenes/levels/level_transform_interact.tscn" id="7_f4w7p"]
+[ext_resource type="AudioStream" uid="uid://r8yny7a0l0of" path="res://assets/audio/example_music_01.ogg" id="8_stn4f"]
+[ext_resource type="PackedScene" uid="uid://nbv4q5hg05s6" path="res://scenes/npcs/npc.tscn" id="9_mgysy"]
+[ext_resource type="Resource" uid="uid://b8eu7po5wx45m" path="res://items/gem.tres" id="9_t4hbi"]
+[ext_resource type="Resource" uid="uid://3aim0svpipx1" path="res://items/apple.tres" id="9_y6ugs"]
+[ext_resource type="Resource" uid="uid://dyxu1ojjur15" path="res://scenes/npcs/00_npcs/bro_01.tres" id="10_00lga"]
+[ext_resource type="PackedScene" uid="uid://berisgd8i8d34" path="res://scenes/npcs/npc_behavior_wander/npc_behavior_wander.tscn" id="10_i5lnw"]
+[ext_resource type="PackedScene" uid="uid://bp6a3ht7m3s05" path="res://scenes/objects/treasure_chest/treasure_chest.tscn" id="10_mgysy"]
+[ext_resource type="Resource" uid="uid://cy5rrbrbe2q6" path="res://items/a_ninjia_suit.tres" id="11_d3bhw"]
+[ext_resource type="PackedScene" uid="uid://ccwfhu5rycktv" path="res://scenes/npcs/npc_behavior_patrol/npc_behavior_patrol.tscn" id="12_psxqg"]
+[ext_resource type="PackedScene" uid="uid://d4bmdr1mrv3jk" path="res://scenes/component/dialog/dialog_interact.tscn" id="12_x2sro"]
+[ext_resource type="Script" uid="uid://cqdnfbqkrusmx" path="res://scenes/component/dialog/dialog_text.gd" id="13_kewy1"]
+[ext_resource type="PackedScene" uid="uid://18lm7qh66vqr" path="res://scenes/objects/sign/sign.tscn" id="13_oxc04"]
+[ext_resource type="PackedScene" uid="uid://xaknbcbbyfqc" path="res://scenes/npcs/npc_behavior_patrol/patrol_location.tscn" id="13_x2sro"]
+[ext_resource type="Resource" uid="uid://b1yogo38uh3np" path="res://scenes/npcs/00_npcs/player.tres" id="14_obd8e"]
+[ext_resource type="Resource" uid="uid://deopptq78xbhy" path="res://scenes/npcs/00_npcs/bro_02.tres" id="15_1cdar"]
+[ext_resource type="Script" uid="uid://dyqbf545x3xok" path="res://scenes/component/dialog/dialog_choice.gd" id="18_diwyw"]
+[ext_resource type="Script" uid="uid://c8v27t3y3r6a5" path="res://scenes/component/dialog/dialog_branch.gd" id="19_g0ka2"]
+[ext_resource type="PackedScene" uid="uid://cxt5u5fx2aurm" path="res://quests/utility_nodes/quest_advance_trigger.tscn" id="21_gucdd"]
+[ext_resource type="Resource" uid="uid://biupqmos7xtfq" path="res://quests/recover_lost_flute.tres" id="23_t4hbi"]
+[ext_resource type="PackedScene" uid="uid://cys81dwfbhosi" path="res://quests/utility_nodes/quest_activated_switch.tscn" id="24_13pdc"]
+
+[sub_resource type="GDScript" id="GDScript_d3bhw"]
+script/source = "extends Node
+
+
+
+@onready var quest_advance_trigger: Quest_Advance_Trigger = $\"..\"
+
+
+
+func _ready() -> void:
+	quest_advance_trigger.advanced.connect(_remove_flute)
+
+
+
+func _remove_flute():
+	PlayerManager.INVENTORY_DATA.remove_item(load(\"res://items/magical_flute.tres\"), 1)
+"
+
+[node name="Section_01" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_0y4hu")
+BGM = ExtResource("8_stn4f")
+
+[node name="Tilemap" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Grass_01" parent="Tilemap" instance=ExtResource("2_uly6q")]
+z_index = -5
+tile_map_data = PackedByteArray("AAD+/wMAAAAAAAAAAAD+/wQAAAACAAEAAAD+/wUAAAAAAAAAAAD//wMAAAACAAEAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAABAAMAAAAOAAUAAAABAAQAAAAOAAYAAAABAAUAAAAOAAUAAAD+/wYAAAABAAEAAAD+/wcAAAAAAAAAAAD+/wgAAAAAAAAAAAD//wYAAAABAAEAAAD//wcAAAAAAAAAAAD//wgAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAgAAAAAAAAAAAABAAYAAAAOAAYAAAABAAcAAAAOAAUAAAABAAgAAAAOAAYAAAD+/wkAAAAAAAAAAAD+/woAAAAAAAAAAAD+/wsAAAAAAAAAAAD//wkAAAAAAAAAAAD//woAAAABAAEAAAD//wsAAAACAAEAAAAAAAkAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAAsAAAAAAAAAAAABAAkAAAAOAAUAAAABAAoAAAAOAAYAAAABAAsAAAAOAAUAAAD+/wwAAAAAAAAAAAD+/w0AAAACAAEAAAD+/w4AAAANAAYAAAD//wwAAAACAAEAAAD//w0AAAAAAAAAAAD//w4AAAANAAYAAAAAAAwAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA4AAAANAAYAAAABAAwAAAAOAAYAAAABAA0AAAAOAAUAAAABAA4AAAAOAAYAAAD+/w8AAAANAAcAAAD+/xEAAAABAAEAAAD//w8AAAANAAcAAAD//xEAAAACAAEAAAAAAA8AAAANAAcAAAAAABEAAAABAAIAAAABAA8AAAAOAAcAAAABABEAAAACAAIAAAD+/xIAAAAAAAAAAAD//xIAAAAAAAAAAAAAABIAAAABAAMAAAABABIAAAACAAMAAAACAAMAAAAAAAAAAAACAAQAAAAAAAAAAAACAAUAAAABAAEAAAADAAMAAAAAAAAAAAADAAQAAAACAAEAAAADAAUAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAQAAAAAAAAAAAAEAAUAAAAAAAAAAAAFAAMAAAAAAAAAAAAFAAQAAAAAAAAAAAAFAAUAAAAAAAAAAAACAAYAAAAAAAAAAAACAAcAAAAAAAAAAAACAAgAAAAAAAAAAAADAAYAAAAMAAAAAAADAAcAAAAMAAEAAAADAAgAAAAMAAMAAAAEAAYAAAAOAAAAAAAEAAcAAAANAAIAAAAEAAgAAAANAAMAAAAFAAYAAAAOAAAAAAAFAAcAAAANAAIAAAAFAAgAAAANAAMAAAACAAkAAAABAAIAAAACAAoAAAAAAAAAAAACAAsAAAAAAAAAAAADAAkAAAACAAIAAAADAAoAAAABAAEAAAADAAsAAAAAAAAAAAAEAAkAAAADAAIAAAAEAAoAAAAAAAIAAAAEAAsAAAAAAAIAAAAFAAkAAAABAAIAAAAFAAoAAAABAAIAAAAFAAsAAAABAAIAAAACAAwAAAAAAAAAAAACAA0AAAAAAAAAAAACAA4AAAAAAAAAAAADAAwAAAAAAAAAAAADAA0AAAAAAAAAAAADAA4AAAAAAAAAAAAEAAwAAAAAAAAAAAAEAA0AAAAAAAAAAAAEAA4AAAACAAEAAAAFAAwAAAAAAAAAAAAFAA0AAAAAAAAAAAAFAA4AAAAAAAAAAAACAA8AAAAAAAAAAAACABAAAAANAAQAAAACABEAAAADAAIAAAADAA8AAAAAAAAAAAADABAAAAALAAQAAAADABEAAAAAAAAAAAAEAA8AAAAAAAAAAAAEABAAAAAMAAQAAAAEABEAAAAAAAAAAAAFAA8AAAAAAAAAAAAFABAAAAANAAQAAAAFABEAAAAAAAAAAAACABIAAAADAAMAAAADABIAAAAAAAAAAAAEABIAAAACAAEAAAAFABIAAAAAAAAAAAAGAAMAAAAAAAAAAAAGAAQAAAAAAAAAAAAGAAUAAAAAAAAAAAAHAAMAAAAAAAAAAAAHAAQAAAAAAAAAAAAHAAUAAAAAAAAAAAAIAAMAAAAAAAAAAAAIAAQAAAABAAEAAAAIAAUAAAABAAEAAAAJAAMAAAAAAAAAAAAJAAQAAAAAAAAAAAAJAAUAAAAAAAAAAAAGAAYAAAAOAAAAAAAGAAcAAAANAAIAAAAGAAgAAAANAAMAAAAHAAYAAAAOAAAAAAAHAAcAAAANAAIAAAAHAAgAAAANAAMAAAAIAAYAAAAPAAAAAAAIAAcAAAAPAAEAAAAIAAgAAAAPAAMAAAAJAAYAAAAAAAAAAAAJAAcAAAAAAAAAAAAJAAgAAAAAAAAAAAAGAAkAAAACAAIAAAAGAAsAAAACAAIAAAAHAAkAAAABAAIAAAAHAAsAAAADAAIAAAAIAAkAAAACAAIAAAAIAAsAAAAAAAAAAAAJAAkAAAADAAIAAAAJAAoAAAACAAEAAAAJAAsAAAAAAAAAAAAGAAwAAAAAAAAAAAAGAA0AAAAAAAAAAAAGAA4AAAABAAEAAAAHAAwAAAAAAAAAAAAHAA0AAAABAAEAAAAHAA4AAAAAAAAAAAAIAAwAAAAAAAAAAAAIAA0AAAAAAAAAAAAIAA4AAAAAAAAAAAAJAAwAAAABAAEAAAAJAA0AAAAAAAAAAAAJAA4AAAABAAEAAAAGAA8AAAAAAAAAAAAGABAAAAALAAQAAAAGABEAAAAAAAAAAAAHAA8AAAAAAAAAAAAHABAAAAAMAAQAAAAHABEAAAAAAAAAAAAIAA8AAAAAAAAAAAAIABAAAAANAAQAAAAIABEAAAAAAAAAAAAJAA8AAAAAAAAAAAAJABAAAAALAAQAAAAJABEAAAAAAAAAAAAGABIAAAAAAAAAAAAHABIAAAAAAAAAAAAIABIAAAAAAAAAAAAJABIAAAAAAAAAAAAKAAMAAAAAAAAAAAAKAAQAAAABAAEAAAAKAAUAAAAAAAAAAAALAAMAAAAAAAAAAAALAAQAAAAAAAAAAAALAAUAAAAAAAAAAAAMAAMAAAAAAAAAAAAMAAQAAAAAAAAAAAAMAAUAAAAAAAAAAAANAAMAAAAAAAAAAAANAAQAAAAAAAAAAAANAAUAAAAAAAAAAAAKAAYAAAAAAAAAAAAKAAcAAAAAAAAAAAAKAAgAAAAAAAAAAAALAAYAAAAAAAAAAAALAAcAAAAAAAAAAAALAAgAAAABAAEAAAAMAAYAAAAAAAAAAAAMAAcAAAABAAEAAAAMAAgAAAAAAAAAAAANAAYAAAAAAAAAAAANAAcAAAAAAAAAAAANAAgAAAAAAAAAAAAKAAkAAAAAAAAAAAAKAAoAAAAAAAAAAAAKAAsAAAAAAAAAAAALAAkAAAAAAAAAAAALAAoAAAAAAAAAAAALAAsAAAAAAAAAAAAMAAkAAAAAAAAAAAAMAAoAAAABAAEAAAAMAAsAAAAAAAAAAAANAAkAAAAAAAAAAAANAAoAAAAAAAAAAAANAAsAAAAAAAAAAAAKAAwAAAACAAEAAAAKAA0AAAAAAAAAAAAKAA4AAAAAAAAAAAALAAwAAAAAAAAAAAALAA0AAAAAAAAAAAALAA4AAAAAAAAAAAAMAAwAAAAAAAAAAAAMAA0AAAAAAAAAAAAMAA4AAAABAAEAAAANAAwAAAAAAAAAAAANAA0AAAAAAAAAAAANAA4AAAAAAAAAAAAKAA8AAAAAAAAAAAAKABAAAAAMAAQAAAAKABEAAAAAAAAAAAALAA8AAAAAAAAAAAALABAAAAANAAQAAAALABEAAAAAAAAAAAAMAA8AAAAAAAAAAAAMABAAAAAOAAQAAAAMABEAAAAOAAUAAAANAA8AAAAAAAAAAAANABEAAAAAAAAAAAAKABIAAAABAAEAAAALABIAAAAAAAAAAAAMABIAAAAOAAYAAAANABIAAAAAAAAAAAAOAAMAAAAAAAAAAAAOAAQAAAAAAAAAAAAOAAUAAAAAAAAAAAAPAAMAAAAAAAAAAAAPAAQAAAABAAEAAAAPAAUAAAAAAAAAAAAQAAMAAAAAAAAAAAAQAAQAAAAAAAAAAAAQAAUAAAAAAAAAAAARAAMAAAAAAAAAAAARAAQAAAAAAAAAAAARAAUAAAAAAAAAAAAOAAYAAAAAAAAAAAAOAAcAAAAAAAAAAAAOAAgAAAAAAAAAAAAPAAYAAAAAAAAAAAAPAAcAAAABAAEAAAAPAAgAAAAAAAAAAAAQAAYAAAAAAAAAAAAQAAcAAAAAAAAAAAAQAAgAAAAAAAAAAAARAAYAAAAAAAAAAAARAAcAAAAAAAAAAAARAAgAAAACAAEAAAAOAAkAAAAAAAAAAAAOAAoAAAABAAEAAAAOAAsAAAABAAEAAAAPAAkAAAAAAAAAAAAPAAoAAAAAAAAAAAAPAAsAAAAAAAAAAAAQAAkAAAAAAAAAAAAQAAoAAAAAAAAAAAAQAAsAAAAAAAAAAAARAAkAAAAAAAAAAAARAAoAAAAAAAAAAAARAAsAAAAAAAAAAAAOAAwAAAACAAEAAAAOAA0AAAABAAEAAAAOAA4AAAAAAAAAAAAPAAwAAAACAAEAAAAPAA0AAAAAAAAAAAAPAA4AAAAAAAAAAAAQAAwAAAABAAEAAAAQAA0AAAAAAAAAAAAQAA4AAAAAAAAAAAARAAwAAAACAAEAAAARAA0AAAAAAAAAAAARAA4AAAAAAAAAAAAOAA8AAAAAAAAAAAAOABEAAAAAAAAAAAAPAA8AAAAAAAAAAAAPABEAAAAAAAAAAAAQAA8AAAABAAEAAAAQABAAAAAKAAQAAAAQABEAAAAKAAUAAAARAA8AAAAAAAAAAAARABAAAAANAAQAAAARABEAAAAAAAAAAAAOABIAAAABAAEAAAAPABIAAAAAAAAAAAAQABIAAAAKAAYAAAARABIAAAAAAAAAAAASAAMAAAAAAAAAAAASAAQAAAAAAAAAAAASAAUAAAAAAAAAAAATAAMAAAAAAAAAAAATAAQAAAACAAEAAAATAAUAAAABAAEAAAAUAAMAAAAAAAAAAAAUAAQAAAAAAAAAAAAUAAUAAAAAAAAAAAAVAAMAAAAAAAAAAAAVAAQAAAAAAAAAAAAVAAUAAAAAAAAAAAASAAYAAAAAAAAAAAASAAcAAAACAAEAAAASAAgAAAAAAAAAAAATAAYAAAAAAAAAAAATAAcAAAAAAAAAAAATAAgAAAAAAAAAAAAUAAYAAAAAAAAAAAAUAAcAAAAAAAAAAAAUAAgAAAAAAAAAAAAVAAYAAAAAAAAAAAAVAAcAAAAAAAAAAAAVAAgAAAAAAAAAAAASAAkAAAAAAAAAAAASAAoAAAACAAEAAAASAAsAAAAAAAAAAAATAAkAAAAAAAAAAAATAAoAAAAAAAAAAAATAAsAAAAAAAAAAAAUAAkAAAAAAAAAAAAUAAoAAAAAAAAAAAAUAAsAAAAAAAAAAAAVAAkAAAAAAAAAAAAVAAoAAAAAAAAAAAAVAAsAAAAAAAAAAAASAAwAAAAAAAAAAAASAA0AAAAAAAAAAAASAA4AAAAAAAAAAAATAAwAAAAAAAAAAAATAA0AAAAAAAAAAAATAA4AAAAAAAAAAAAUAAwAAAACAAEAAAAUAA0AAAAAAAAAAAAUAA4AAAAAAAAAAAAVAAwAAAAAAAAAAAAVAA0AAAAAAAAAAAAVAA4AAAAAAAAAAAASAA8AAAAAAAAAAAASABAAAAALAAQAAAASABEAAAAAAAAAAAATAA8AAAAAAAAAAAATABAAAAAMAAQAAAATABEAAAACAAEAAAAUAA8AAAAAAAAAAAAUABAAAAANAAQAAAAUABEAAAACAAEAAAAVAA8AAAAAAAAAAAAVABAAAAALAAQAAAAVABEAAAAAAAAAAAASABIAAAAAAAAAAAATABIAAAAAAAAAAAAUABIAAAACAAEAAAAVABIAAAAAAAAAAAAWAAMAAAAAAAAAAAAWAAQAAAAAAAAAAAAWAAUAAAAAAAAAAAAXAAMAAAAAAAAAAAAXAAQAAAAAAAAAAAAXAAUAAAAAAAAAAAAYAAMAAAAAAAAAAAAYAAQAAAAAAAAAAAAYAAUAAAAAAAAAAAAZAAMAAAABAAEAAAAZAAQAAAAAAAAAAAAZAAUAAAAAAAAAAAAWAAYAAAAAAAAAAAAWAAcAAAAAAAAAAAAWAAgAAAABAAEAAAAXAAYAAAAAAAAAAAAXAAcAAAABAAEAAAAXAAgAAAAAAAAAAAAYAAYAAAACAAEAAAAYAAcAAAABAAEAAAAYAAgAAAAAAAAAAAAZAAYAAAAAAAAAAAAZAAcAAAAAAAAAAAAZAAgAAAAAAAAAAAAWAAkAAAAAAAAAAAAWAAoAAAABAAEAAAAWAAsAAAAAAAAAAAAXAAkAAAABAAEAAAAXAAoAAAAAAAAAAAAXAAsAAAAAAAAAAAAYAAkAAAABAAEAAAAYAAoAAAAAAAAAAAAYAAsAAAAAAAAAAAAZAAkAAAAAAAAAAAAZAAoAAAAAAAAAAAAZAAsAAAAAAAAAAAAWAAwAAAACAAEAAAAWAA0AAAAAAAAAAAAWAA4AAAAAAAAAAAAXAAwAAAAAAAAAAAAXAA0AAAAAAAAAAAAXAA4AAAACAAEAAAAYAAwAAAAAAAAAAAAYAA0AAAAAAAAAAAAYAA4AAAAAAAAAAAAZAAwAAAACAAEAAAAZAA0AAAABAAEAAAAZAA4AAAAAAAAAAAAWAA8AAAAAAAAAAAAWABAAAAAMAAQAAAAWABEAAAAAAAAAAAAXAA8AAAACAAEAAAAXABAAAAANAAQAAAAXABEAAAAAAAAAAAAYAA8AAAAAAAAAAAAYABAAAAALAAQAAAAYABEAAAABAAEAAAAZAA8AAAACAAEAAAAZABAAAAAMAAQAAAAZABEAAAAAAAAAAAAWABIAAAAAAAAAAAAXABIAAAAAAAAAAAAYABIAAAAAAAAAAAAZABIAAAAAAAAAAAAaAAMAAAACAAEAAAAaAAQAAAAAAAAAAAAaAAUAAAAAAAAAAAAbAAMAAAAKAAYAAAAbAAQAAAAKAAUAAAAbAAUAAAAKAAYAAAAcAAMAAAAAAAAAAAAcAAQAAAAAAAAAAAAcAAUAAAAAAAAAAAAdAAMAAAAAAAAAAAAdAAQAAAAAAAAAAAAdAAUAAAAAAAAAAAAaAAYAAAAAAAAAAAAaAAcAAAAAAAAAAAAaAAgAAAAAAAAAAAAbAAYAAAAKAAYAAAAbAAcAAAAKAAcAAAAbAAgAAAABAAIAAAAcAAYAAAALAAYAAAAcAAcAAAALAAcAAAAcAAgAAAACAAIAAAAdAAYAAAAMAAYAAAAdAAcAAAAMAAcAAAAdAAgAAAADAAIAAAAaAAkAAAAAAAAAAAAaAAoAAAAAAAAAAAAaAAsAAAAAAAAAAAAbAAsAAAAKAAQAAAAcAAkAAAAAAAAAAAAcAAoAAAAAAAAAAAAcAAsAAAALAAQAAAAdAAkAAAAAAAAAAAAdAAoAAAAAAAAAAAAdAAsAAAAMAAQAAAAaAAwAAAAAAAAAAAAaAA0AAAAAAAAAAAAaAA4AAAABAAEAAAAbAAwAAAAKAAUAAAAbAA0AAAAKAAYAAAAbAA4AAAAKAAUAAAAcAAwAAAAAAAAAAAAcAA0AAAACAAEAAAAcAA4AAAAAAAAAAAAdAAwAAAAAAAAAAAAdAA0AAAABAAEAAAAdAA4AAAAAAAAAAAAaAA8AAAAAAAAAAAAaABAAAAAOAAQAAAAaABEAAAAOAAUAAAAbAA8AAAAKAAYAAAAbABAAAAAKAAUAAAAbABEAAAAKAAYAAAAcAA8AAAAAAAAAAAAcABAAAAAAAAIAAAAcABEAAAABAAEAAAAdAA8AAAACAAEAAAAdABAAAAAAAAIAAAAdABEAAAAAAAAAAAAaABIAAAAOAAYAAAAbABIAAAAKAAUAAAAcABIAAAAAAAAAAAAdABIAAAAAAAAAAAAeAAMAAAAAAAIAAAAeAAQAAAAAAAAAAAAeAAUAAAAAAAAAAAAeAAYAAAANAAYAAAAeAAcAAAANAAcAAAAeAAgAAAABAAIAAAAeAAkAAAAAAAAAAAAeAAoAAAABAAEAAAAeAAsAAAANAAQAAAAeAAwAAAAAAAAAAAAeAA0AAAAAAAAAAAAeAA4AAAAAAAAAAAAeAA8AAAAAAAEAAAAeABAAAAAAAAAAAAAeABEAAAAAAAAAAAAeABIAAAAAAAAAAAD9/wMAAAAAAAAAAAD9/wQAAAAAAAAAAAD9/wUAAAAAAAAAAAD9/wYAAAAAAAAAAAD9/wcAAAACAAEAAAD9/wgAAAAAAAAAAAD9/wkAAAAAAAAAAAD9/woAAAAAAAAAAAD9/wsAAAABAAEAAAD9/wwAAAAAAAAAAAD9/w0AAAAAAAAAAAD9/w4AAAANAAYAAAD9/w8AAAANAAcAAAD9/xEAAAAAAAEAAAD9/xIAAAABAAEAAAD9/xAAAAALAAQAAAD+/xAAAAAMAAQAAAD//xAAAAANAAQAAAAAABAAAAALAAQAAAABABAAAAAMAAQAAAAbAAkAAAABAAIAAAAbAAoAAAABAAMAAAANABAAAAADAAIAAAAOABAAAAADAAIAAAAPABAAAAADAAIAAAABAAIAAAAOAAYAAAAbAAIAAAAKAAYAAAD9/wIAAAAAAAMAAAD+/wIAAAABAAMAAAD//wIAAAACAAMAAAAAAAIAAAADAAMAAAACAAIAAAAAAAMAAAADAAIAAAABAAMAAAAEAAIAAAACAAMAAAAFAAIAAAADAAMAAAAGAAIAAAAAAAMAAAAHAAIAAAABAAMAAAAIAAIAAAACAAMAAAAJAAIAAAADAAMAAAAKAAIAAAAAAAMAAAALAAIAAAABAAMAAAAMAAIAAAACAAMAAAANAAIAAAADAAMAAAAOAAIAAAAAAAMAAAAPAAIAAAABAAMAAAAQAAIAAAACAAMAAAARAAIAAAADAAMAAAASAAIAAAAAAAMAAAATAAIAAAABAAMAAAAUAAIAAAACAAMAAAAVAAIAAAADAAMAAAAWAAIAAAAAAAMAAAAXAAIAAAAAAAMAAAAYAAIAAAABAAMAAAAZAAIAAAACAAMAAAAaAAIAAAADAAMAAAAcAAIAAAAAAAMAAAAdAAIAAAABAAMAAAAeAAIAAAACAAMAAAD9//7/AAAAAAIAAAD9////AAAAAAIAAAD9/wAAAAAAAAIAAAD+//7/AAABAAIAAAD+////AAABAAIAAAD+/wAAAAABAAIAAAD///7/AAACAAIAAAD/////AAACAAIAAAD//wAAAAACAAIAAAAAAP7/AAAAAAIAAAAAAP//AAAAAAIAAAAAAAAAAAADAAIAAAABAP7/AAAOAAUAAAABAP//AAAOAAYAAAABAAAAAAAOAAUAAAACAP7/AAAKAAYAAAACAP//AAAKAAcAAAACAAAAAAABAAIAAAADAP7/AAAMAAYAAAADAP//AAAMAAcAAAADAAAAAAABAAIAAAAEAP7/AAANAAYAAAAEAP//AAANAAcAAAAEAAAAAAACAAIAAAAFAP7/AAALAAYAAAAFAP//AAALAAcAAAAFAAAAAAADAAIAAAAGAP7/AAAMAAYAAAAGAP//AAAMAAcAAAAGAAAAAAACAAEAAAAHAP7/AAANAAYAAAAHAP//AAANAAcAAAAHAAAAAAABAAIAAAAIAP7/AAALAAYAAAAIAP//AAALAAcAAAAIAAAAAAADAAIAAAAJAP7/AAAMAAYAAAAJAP//AAAMAAcAAAAJAAAAAAACAAEAAAAKAP7/AAANAAYAAAAKAP//AAANAAcAAAAKAAAAAAAAAAIAAAALAP7/AAALAAYAAAALAP//AAALAAcAAAALAAAAAAABAAEAAAAMAP7/AAAMAAYAAAAMAP//AAAMAAcAAAAMAAAAAAACAAEAAAANAP7/AAANAAYAAAANAP//AAANAAcAAAANAAAAAAADAAIAAAAOAP7/AAALAAYAAAAOAP//AAALAAcAAAAOAAAAAAAAAAIAAAAPAP7/AAAMAAYAAAAPAP//AAAMAAcAAAAPAAAAAAABAAIAAAAQAP7/AAANAAYAAAAQAP//AAANAAcAAAAQAAAAAAACAAIAAAARAP7/AAALAAYAAAARAP//AAALAAcAAAARAAAAAAADAAIAAAASAP7/AAAMAAYAAAASAP//AAAMAAcAAAASAAAAAAABAAEAAAATAP7/AAANAAYAAAATAP//AAANAAcAAAATAAAAAAABAAIAAAAUAP7/AAALAAYAAAAUAP//AAALAAcAAAAUAAAAAAACAAEAAAAVAP7/AAAMAAYAAAAVAP//AAAMAAcAAAAVAAAAAAACAAEAAAAWAP7/AAANAAYAAAAWAP//AAANAAcAAAAWAAAAAAAAAAIAAAAXAP7/AAALAAYAAAAXAP//AAALAAcAAAAXAAAAAAACAAEAAAAYAP7/AAAMAAYAAAAYAP//AAAMAAcAAAAYAAAAAAABAAIAAAAZAP7/AAANAAYAAAAZAP//AAANAAcAAAAZAAAAAAACAAIAAAAaAP7/AAAOAAYAAAAaAP//AAAOAAcAAAAaAAAAAAADAAIAAAAbAP7/AAAKAAYAAAAbAP//AAAKAAUAAAAbAAAAAAAKAAUAAAAcAP7/AAAAAAIAAAAcAP//AAAAAAIAAAAcAAAAAAAAAAIAAAAdAP7/AAABAAIAAAAdAP//AAABAAIAAAAdAAAAAAABAAIAAAAeAP7/AAAAAAIAAAAeAP//AAAAAAIAAAAeAAAAAAACAAIAAAD9//3/AAAAAAAAAAD+//3/AAACAAEAAAD///3/AAAAAAAAAAAAAP3/AAAAAAAAAAABAP3/AAAOAAYAAAACAP3/AAAKAAUAAAADAP3/AAAAAAAAAAAEAP3/AAAAAAAAAAAFAP3/AAAAAAAAAAAGAP3/AAAAAAAAAAAHAP3/AAAAAAAAAAAIAP3/AAAAAAAAAAAJAP3/AAAAAAAAAAAKAP3/AAAAAAAAAAALAP3/AAAAAAAAAAAMAP3/AAAAAAAAAAANAP3/AAAAAAAAAAAOAP3/AAAAAAAAAAAPAP3/AAAAAAAAAAAQAP3/AAAAAAAAAAARAP3/AAAAAAAAAAASAP3/AAAAAAAAAAATAP3/AAAAAAAAAAAUAP3/AAAAAAAAAAAVAP3/AAAAAAAAAAAWAP3/AAAAAAAAAAAXAP3/AAAAAAAAAAAYAP3/AAAAAAAAAAAZAP3/AAAAAAAAAAAaAP3/AAAOAAUAAAAbAP3/AAAKAAUAAAAcAP3/AAAAAAAAAAAdAP3/AAAAAAAAAAAeAP3/AAAAAAAAAAABAAEAAAAOAAUAAAAbAAEAAAAKAAUAAAD+/wEAAAABAAIAAAD//wEAAAACAAIAAAAAAAEAAAADAAIAAAACAAEAAAABAAIAAAADAAEAAAACAAIAAAAEAAEAAAADAAIAAAAFAAEAAAABAAIAAAAGAAEAAAACAAIAAAAHAAEAAAADAAIAAAAIAAEAAAABAAEAAAAJAAEAAAACAAIAAAAKAAEAAAADAAIAAAALAAEAAAABAAIAAAAMAAEAAAACAAIAAAANAAEAAAADAAEAAAAOAAEAAAACAAEAAAAPAAEAAAAAAAEAAAAQAAEAAAADAAIAAAARAAEAAAABAAIAAAASAAEAAAACAAIAAAATAAEAAAADAAIAAAAUAAEAAAABAAIAAAAVAAEAAAACAAEAAAAWAAEAAAADAAIAAAAXAAEAAAAAAAEAAAAYAAEAAAABAAIAAAAZAAEAAAACAAIAAAAaAAEAAAADAAIAAAAcAAEAAAABAAIAAAAdAAEAAAACAAIAAAAeAAEAAAADAAIAAAD9/wEAAAABAAMAAAAGAAoAAAACAAIAAAAHAAoAAAADAAIAAAAIAAoAAAABAAIAAAA=")
+
+[node name="Shop_Tilemap" parent="Tilemap" instance=ExtResource("4_13pdc")]
+tile_map_data = PackedByteArray("AAACAAEAAAAKAAgAAAACAAIAAAAKAAkAAAACAAMAAAAKAAoAAAADAAAAAAALAAcAAAADAAEAAAALAAgAAAADAAIAAAALAAkAAAADAAMAAAALAAoAAAADAAQAAAALAAsAAAADAAUAAAAKAAwAAAAEAP//AAALAAcAAAAEAAAAAAALAAgAAAAEAAEAAAALAAkAAAAEAAIAAAALAAoAAAAEAAMAAAALAAsAAAAEAAQAAAAMAAsAAAAEAAUAAAAMAA4AAAAFAP//AAAMAAcAAAAFAAAAAAAMAAgAAAAFAAEAAAAMAAkAAAAFAAIAAAAMAAoAAAAFAAMAAAAMAAsAAAAFAAQAAAAMAAwAAAAFAAUAAAANAA4AAAAGAP//AAANAAcAAAAGAAAAAAANAAgAAAAGAAEAAAANAAkAAAAGAAIAAAANAAoAAAAGAAMAAAANAAsAAAAGAAQAAAANAAwAAAAGAAUAAAAKAA4AAAAHAP//AAAOAAcAAAAHAAAAAAAOAAgAAAAHAAEAAAAOAAkAAAAHAAIAAAAOAAoAAAAHAAMAAAAOAAsAAAAHAAQAAAANAAsAAAAHAAUAAAALAA4AAAAIAAAAAAAOAAcAAAAIAAEAAAAOAAgAAAAIAAIAAAAOAAkAAAAIAAMAAAAOAAoAAAAIAAQAAAAOAAsAAAAIAAUAAAAOAAwAAAAJAAEAAAAPAAgAAAAJAAIAAAAPAAkAAAAJAAMAAAAPAAoAAAACAAQAAAAKAAsAAAADAAYAAAAKAA0AAAAEAAYAAAAMAA8AAAAFAAYAAAANAA8AAAAGAAYAAAAKAA8AAAAHAAYAAAALAA8AAAAIAAYAAAAOAA0AAAAJAAQAAAAPAAsAAAA=")
+
+[node name="Player_Spawn" parent="." instance=ExtResource("3_ejlmb")]
+position = Vector2(413, 102)
+
+[node name="Level_Transform" parent="." instance=ExtResource("4_uly6q")]
+position = Vector2(464, 584)
+level = "uid://ssr8yva2kv50"
+target_transform_area = "Level_Transform"
+size = 3
+
+[node name="Level_Transform2" parent="." instance=ExtResource("4_uly6q")]
+position = Vector2(958, 304)
+level = "uid://b5plk8qixwvuj"
+target_transform_area = "Level_Transform"
+size = 3
+side = 1
+
+[node name="Level_Transform_Shop" parent="." instance=ExtResource("7_f4w7p")]
+position = Vector2(160, 226)
+level = "uid://c8pjhdwe0fsje"
+size = 1
+side = 2
+center_player = true
+
+[node name="Objects" type="Node2D" parent="."]
+z_as_relative = false
+y_sort_enabled = true
+
+[node name="Items" type="Node2D" parent="Objects"]
+y_sort_enabled = true
+position = Vector2(-21, 17)
+
+[node name="Item_Pickup4" parent="Objects/Items" instance=ExtResource("5_qim7c")]
+position = Vector2(130, 464)
+item_data = ExtResource("9_y6ugs")
+item_count = 0
+
+[node name="Treasure_Chest2" parent="Objects" instance=ExtResource("10_mgysy")]
+position = Vector2(776, 461)
+item_data = ExtResource("9_t4hbi")
+quantity = 10
+
+[node name="Treasure_Chest3" parent="Objects" instance=ExtResource("10_mgysy")]
+position = Vector2(192, 16)
+item_data = ExtResource("11_d3bhw")
+
+[node name="Sign" parent="Objects" instance=ExtResource("13_oxc04")]
+position = Vector2(430, 209)
+text = "鼠标左键攻击，长按可蓄力攻击
+鼠标右键与事物交互
+空格键释放技能
+Shift键释放闪避冲刺"
+
+[node name="Sign2" parent="Objects" instance=ExtResource("13_oxc04")]
+position = Vector2(662, 457)
+text = "悄悄靠近一个野生的宝箱，
+然后按下鼠标右键狠狠地打开！"
+
+[node name="NPCs" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Old_Bro" parent="NPCs" instance=ExtResource("9_mgysy")]
+position = Vector2(222, 414.0586)
+npc_resource = ExtResource("10_00lga")
+
+[node name="Behavior_Wander" parent="NPCs/Old_Bro" instance=ExtResource("10_i5lnw")]
+
+[node name="Dialog_Interact" parent="NPCs/Old_Bro" instance=ExtResource("12_x2sro")]
+process_mode = 3
+
+[node name="Dalog_Text" type="Node" parent="NPCs/Old_Bro/Dialog_Interact"]
+script = ExtResource("13_kewy1")
+text = "老铁，杵在这干*毛呢！
+莫非这里有什么[shake][color=#ff5500]稀世珍宝[/color][/shake]？"
+npc_info = ExtResource("14_obd8e")
+metadata/_custom_type_script = "uid://cqdnfbqkrusmx"
+
+[node name="Dalog_Text2" type="Node" parent="NPCs/Old_Bro/Dialog_Interact"]
+script = ExtResource("13_kewy1")
+text = "那必须的啊老弟，告诉你个秘密，
+[color=red][wave]苹果[/wave][/color]是个好东西，
+多捡点，以备不时之需！"
+npc_info = ExtResource("10_00lga")
+metadata/_custom_type_script = "uid://cqdnfbqkrusmx"
+
+[node name="Dalog_Text3" type="Node" parent="NPCs/Old_Bro/Dialog_Interact"]
+script = ExtResource("13_kewy1")
+text = "就这？苹果能卖几个钱？"
+npc_info = ExtResource("14_obd8e")
+metadata/_custom_type_script = "uid://cqdnfbqkrusmx"
+
+[node name="Dalog_Text4" type="Node" parent="NPCs/Old_Bro/Dialog_Interact"]
+script = ExtResource("13_kewy1")
+text = "庸俗！等你饿得连shit都没得吃的时候，
+就知道苹果多珍贵了！"
+npc_info = ExtResource("10_00lga")
+metadata/_custom_type_script = "uid://cqdnfbqkrusmx"
+
+[node name="Dialog_Choice" type="Node" parent="NPCs/Old_Bro/Dialog_Interact"]
+script = ExtResource("18_diwyw")
+npc_info = ExtResource("10_00lga")
+metadata/_custom_type_script = "uid://dyqbf545x3xok"
+
+[node name="Dialog_Branch" type="Node" parent="NPCs/Old_Bro/Dialog_Interact/Dialog_Choice"]
+script = ExtResource("19_g0ka2")
+text = "对不起大哥我错了"
+npc_info = ExtResource("10_00lga")
+metadata/_custom_type_script = "uid://c8v27t3y3r6a5"
+
+[node name="Dialog_Text" type="Node" parent="NPCs/Old_Bro/Dialog_Interact/Dialog_Choice/Dialog_Branch"]
+script = ExtResource("13_kewy1")
+text = "对不起大哥我错了！
+我一定好好珍藏！"
+npc_info = ExtResource("14_obd8e")
+metadata/_custom_type_script = "uid://cqdnfbqkrusmx"
+
+[node name="Dialog_Text2" type="Node" parent="NPCs/Old_Bro/Dialog_Interact/Dialog_Choice/Dialog_Branch"]
+script = ExtResource("13_kewy1")
+text = "算你还有点智商！"
+npc_info = ExtResource("10_00lga")
+metadata/_custom_type_script = "uid://cqdnfbqkrusmx"
+
+[node name="Dialog_Branch2" type="Node" parent="NPCs/Old_Bro/Dialog_Interact/Dialog_Choice"]
+script = ExtResource("19_g0ka2")
+text = "去你*的，劳资不稀罕"
+npc_info = ExtResource("10_00lga")
+metadata/_custom_type_script = "uid://c8v27t3y3r6a5"
+
+[node name="Dialog_Text" type="Node" parent="NPCs/Old_Bro/Dialog_Interact/Dialog_Choice/Dialog_Branch2"]
+script = ExtResource("13_kewy1")
+text = "去你*的，劳资不稀罕！"
+npc_info = ExtResource("14_obd8e")
+metadata/_custom_type_script = "uid://cqdnfbqkrusmx"
+
+[node name="Dialog_Text2" type="Node" parent="NPCs/Old_Bro/Dialog_Interact/Dialog_Choice/Dialog_Branch2"]
+script = ExtResource("13_kewy1")
+text = "愚蠢！赶紧滚蛋吧！"
+npc_info = ExtResource("10_00lga")
+metadata/_custom_type_script = "uid://cqdnfbqkrusmx"
+
+[node name="Young_Bro" parent="NPCs" instance=ExtResource("9_mgysy")]
+position = Vector2(679, 92)
+npc_resource = ExtResource("15_1cdar")
+
+[node name="Behavior_Patrol" parent="NPCs/Young_Bro" instance=ExtResource("12_psxqg")]
+
+[node name="Patrol_Location" parent="NPCs/Young_Bro/Behavior_Patrol" instance=ExtResource("13_x2sro")]
+modulate = Color(1, 0.27058825, 0, 1)
+position = Vector2(0, -3)
+wait_time = 3.0
+
+[node name="Patrol_Location2" parent="NPCs/Young_Bro/Behavior_Patrol" instance=ExtResource("13_x2sro")]
+modulate = Color(1, 0.64705884, 0, 1)
+position = Vector2(-49, 60)
+wait_time = 1.0
+
+[node name="Patrol_Location3" parent="NPCs/Young_Bro/Behavior_Patrol" instance=ExtResource("13_x2sro")]
+modulate = Color(0.25490198, 0.4117647, 0.88235295, 1)
+position = Vector2(8, 121)
+wait_time = 1.8
+
+[node name="Patrol_Location4" parent="NPCs/Young_Bro/Behavior_Patrol" instance=ExtResource("13_x2sro")]
+modulate = Color(1, 1, 0, 1)
+position = Vector2(112, 113)
+wait_time = 1.5
+
+[node name="Patrol_Location5" parent="NPCs/Young_Bro/Behavior_Patrol" instance=ExtResource("13_x2sro")]
+modulate = Color(0.19607843, 0.8039216, 0.19607843, 1)
+position = Vector2(107, 9)
+wait_time = 2.0
+
+[node name="Quest_Activated_Switch" parent="NPCs/Young_Bro" instance=ExtResource("24_13pdc")]
+remove_when_activated = true
+react_global_signal = true
+linked_quest = ExtResource("23_t4hbi")
+settings_summary = "更新任务：
+寻找小老弟的魔法笛
+[正在检查玩家是否有任务]"
+
+[node name="Dialog_Interact" parent="NPCs/Young_Bro/Quest_Activated_Switch" instance=ExtResource("12_x2sro")]
+
+[node name="Dialog_Text" type="Node" parent="NPCs/Young_Bro/Quest_Activated_Switch/Dialog_Interact"]
+script = ExtResource("13_kewy1")
+text = "这位大哥，能不能帮我找一下我丢失的笛子？
+要是能找到必有重谢！"
+npc_info = ExtResource("15_1cdar")
+metadata/_custom_type_script = "uid://cqdnfbqkrusmx"
+
+[node name="Dialog_Text2" type="Node" parent="NPCs/Young_Bro/Quest_Activated_Switch/Dialog_Interact"]
+script = ExtResource("13_kewy1")
+text = "？"
+npc_info = ExtResource("14_obd8e")
+metadata/_custom_type_script = "uid://cqdnfbqkrusmx"
+
+[node name="Dialog_Choice" type="Node" parent="NPCs/Young_Bro/Quest_Activated_Switch/Dialog_Interact"]
+script = ExtResource("18_diwyw")
+npc_info = ExtResource("15_1cdar")
+metadata/_custom_type_script = "uid://dyqbf545x3xok"
+
+[node name="Dialog_Branch" type="Node" parent="NPCs/Young_Bro/Quest_Activated_Switch/Dialog_Interact/Dialog_Choice"]
+script = ExtResource("19_g0ka2")
+text = "接受任务"
+npc_info = ExtResource("15_1cdar")
+metadata/_custom_type_script = "uid://c8v27t3y3r6a5"
+
+[node name="Quest_Advance_Trigger" parent="NPCs/Young_Bro/Quest_Activated_Switch/Dialog_Interact/Dialog_Choice/Dialog_Branch" instance=ExtResource("21_gucdd")]
+position = Vector2(682, 70)
+signal_name = "selected"
+linked_quest = ExtResource("23_t4hbi")
+settings_summary = "更新任务：
+寻找小老弟的魔法笛
+进度：0 - N/A
+是否完成：false"
+
+[node name="Dialog_Text" type="Node" parent="NPCs/Young_Bro/Quest_Activated_Switch/Dialog_Interact/Dialog_Choice/Dialog_Branch"]
+script = ExtResource("13_kewy1")
+text = "没问题，你在哪丢的？"
+npc_info = ExtResource("14_obd8e")
+metadata/_custom_type_script = "uid://cqdnfbqkrusmx"
+
+[node name="Dialog_Text2" type="Node" parent="NPCs/Young_Bro/Quest_Activated_Switch/Dialog_Interact/Dialog_Choice/Dialog_Branch"]
+script = ExtResource("13_kewy1")
+text = "太好了！感激不尽！
+我应该是在右边的 [color=#0a2052][i]洞穴[/i][/color] 探险时丢到里面了！
+之前在那里面看到个[color=#a101b7][shake]老巫师[/shake][/color]，吓得我魂飞魄散，
+连滚带爬地逃了出来..."
+npc_info = ExtResource("15_1cdar")
+metadata/_custom_type_script = "uid://cqdnfbqkrusmx"
+
+[node name="Dialog_Text3" type="Node" parent="NPCs/Young_Bro/Quest_Activated_Switch/Dialog_Interact/Dialog_Choice/Dialog_Branch"]
+script = ExtResource("13_kewy1")
+text = "一个老东西能有多可怕？
+等我一会就去会会他！"
+npc_info = ExtResource("14_obd8e")
+metadata/_custom_type_script = "uid://cqdnfbqkrusmx"
+
+[node name="Dialog_Text5" type="Node" parent="NPCs/Young_Bro/Quest_Activated_Switch/Dialog_Interact/Dialog_Choice/Dialog_Branch"]
+script = ExtResource("13_kewy1")
+text = "那就先多谢大哥了！
+不过大哥最好先磨炼一下自己，
+那个[color=#a101b7][shake]老巫师[/shake][/color]可不太好对付！
+"
+npc_info = ExtResource("15_1cdar")
+metadata/_custom_type_script = "uid://cqdnfbqkrusmx"
+
+[node name="Dialog_Text6" type="Node" parent="NPCs/Young_Bro/Quest_Activated_Switch/Dialog_Interact/Dialog_Choice/Dialog_Branch"]
+script = ExtResource("13_kewy1")
+text = "另外，以防你遭遇不测，
+接下来你可以去拿一些我珍藏多年的[color=#ff0000]宝贝[/color]！
+就在穿过最下面那条[color=#0055ff]河[/color]之后的地方！
+"
+npc_info = ExtResource("15_1cdar")
+metadata/_custom_type_script = "uid://cqdnfbqkrusmx"
+
+[node name="Dialog_Branch2" type="Node" parent="NPCs/Young_Bro/Quest_Activated_Switch/Dialog_Interact/Dialog_Choice"]
+script = ExtResource("19_g0ka2")
+text = "拜拜，兄弟"
+npc_info = ExtResource("15_1cdar")
+metadata/_custom_type_script = "uid://c8v27t3y3r6a5"
+
+[node name="Dialog_Text" type="Node" parent="NPCs/Young_Bro/Quest_Activated_Switch/Dialog_Interact/Dialog_Choice/Dialog_Branch2"]
+script = ExtResource("13_kewy1")
+text = "拜拜，兄弟！"
+npc_info = ExtResource("14_obd8e")
+metadata/_custom_type_script = "uid://cqdnfbqkrusmx"
+
+[node name="Dialog_Text2" type="Node" parent="NPCs/Young_Bro/Quest_Activated_Switch/Dialog_Interact/Dialog_Choice/Dialog_Branch2"]
+script = ExtResource("13_kewy1")
+text = "......"
+npc_info = ExtResource("15_1cdar")
+metadata/_custom_type_script = "uid://cqdnfbqkrusmx"
+
+[node name="Quest_Activated_Switch2" parent="NPCs/Young_Bro" instance=ExtResource("24_13pdc")]
+position = Vector2(2, -23)
+react_global_signal = true
+linked_quest = ExtResource("23_t4hbi")
+settings_summary = "更新任务：
+寻找小老弟的魔法笛
+[正在检查玩家是否有任务]"
+
+[node name="Quest_Activated_Switch2" parent="NPCs/Young_Bro/Quest_Activated_Switch2" instance=ExtResource("24_13pdc")]
+check_mode = 1
+remove_when_activated = true
+react_global_signal = true
+linked_quest = ExtResource("23_t4hbi")
+quest_step = 2
+settings_summary = "更新任务：
+寻找小老弟的魔法笛
+[正在检查玩家是否完成任务步骤：找到笛子]"
+
+[node name="Dialog_Interact" parent="NPCs/Young_Bro/Quest_Activated_Switch2/Quest_Activated_Switch2" instance=ExtResource("12_x2sro")]
+position = Vector2(-2, 23)
+
+[node name="Dialog_Text" type="Node" parent="NPCs/Young_Bro/Quest_Activated_Switch2/Quest_Activated_Switch2/Dialog_Interact"]
+script = ExtResource("13_kewy1")
+text = "找到我的笛子了吗？"
+npc_info = ExtResource("15_1cdar")
+metadata/_custom_type_script = "uid://cqdnfbqkrusmx"
+
+[node name="Dialog_Text2" type="Node" parent="NPCs/Young_Bro/Quest_Activated_Switch2/Quest_Activated_Switch2/Dialog_Interact"]
+script = ExtResource("13_kewy1")
+text = "没有呢，我该去哪找？"
+npc_info = ExtResource("14_obd8e")
+metadata/_custom_type_script = "uid://cqdnfbqkrusmx"
+
+[node name="Dialog_Text3" type="Node" parent="NPCs/Young_Bro/Quest_Activated_Switch2/Quest_Activated_Switch2/Dialog_Interact"]
+script = ExtResource("13_kewy1")
+text = "在右边的洞穴啊，快去快去。"
+npc_info = ExtResource("15_1cdar")
+metadata/_custom_type_script = "uid://cqdnfbqkrusmx"
+
+[node name="Quest_Activated_Switch" parent="NPCs/Young_Bro/Quest_Activated_Switch2" instance=ExtResource("24_13pdc")]
+check_mode = 2
+react_global_signal = true
+linked_quest = ExtResource("23_t4hbi")
+quest_step = 3
+settings_summary = "更新任务：
+寻找小老弟的魔法笛
+[正在检查玩家是否处于任务步骤：将笛子还给小老弟]"
+
+[node name="Dialog_Interact" parent="NPCs/Young_Bro/Quest_Activated_Switch2/Quest_Activated_Switch" instance=ExtResource("12_x2sro")]
+position = Vector2(-2, 23)
+
+[node name="Dialog_Text" type="Node" parent="NPCs/Young_Bro/Quest_Activated_Switch2/Quest_Activated_Switch/Dialog_Interact"]
+script = ExtResource("13_kewy1")
+text = "找到我的笛子了吗？"
+npc_info = ExtResource("15_1cdar")
+metadata/_custom_type_script = "uid://cqdnfbqkrusmx"
+
+[node name="Dialog_Text2" type="Node" parent="NPCs/Young_Bro/Quest_Activated_Switch2/Quest_Activated_Switch/Dialog_Interact"]
+script = ExtResource("13_kewy1")
+text = "找到了，在这呢。"
+npc_info = ExtResource("14_obd8e")
+metadata/_custom_type_script = "uid://cqdnfbqkrusmx"
+
+[node name="Dialog_Text3" type="Node" parent="NPCs/Young_Bro/Quest_Activated_Switch2/Quest_Activated_Switch/Dialog_Interact"]
+script = ExtResource("13_kewy1")
+text = "太棒了！这是给你的报酬！"
+npc_info = ExtResource("15_1cdar")
+metadata/_custom_type_script = "uid://cqdnfbqkrusmx"
+
+[node name="Dialog_Text4" type="Node" parent="NPCs/Young_Bro/Quest_Activated_Switch2/Quest_Activated_Switch/Dialog_Interact"]
+script = ExtResource("13_kewy1")
+text = "别急着走！
+我剩下的[color=#ff0000]所有宝贝[/color]也都是你的了！
+快穿过最下面那条[color=#0055ff]河[/color]去拿吧！"
+npc_info = ExtResource("15_1cdar")
+metadata/_custom_type_script = "uid://cqdnfbqkrusmx"
+
+[node name="Quest_Advance_Trigger" parent="NPCs/Young_Bro/Quest_Activated_Switch2/Quest_Activated_Switch/Dialog_Interact" instance=ExtResource("21_gucdd")]
+signal_name = "finished"
+linked_quest = ExtResource("23_t4hbi")
+quest_step = 3
+quest_complete = true
+settings_summary = "更新任务：
+寻找小老弟的魔法笛
+进度：3 - 将笛子还给小老弟
+是否完成：true"
+
+[node name="Node" type="Node" parent="NPCs/Young_Bro/Quest_Activated_Switch2/Quest_Activated_Switch/Dialog_Interact/Quest_Advance_Trigger"]
+script = SubResource("GDScript_d3bhw")
+
+[node name="Quest_Activated_Switch3" parent="NPCs/Young_Bro/Quest_Activated_Switch2" instance=ExtResource("24_13pdc")]
+check_mode = 3
+react_global_signal = true
+linked_quest = ExtResource("23_t4hbi")
+settings_summary = "更新任务：
+寻找小老弟的魔法笛
+[正在检查任务是否完成]"
+
+[node name="Dialog_Interact" parent="NPCs/Young_Bro/Quest_Activated_Switch2/Quest_Activated_Switch3" instance=ExtResource("12_x2sro")]
+position = Vector2(-2, 23)
+
+[node name="Dialog_Text" type="Node" parent="NPCs/Young_Bro/Quest_Activated_Switch2/Quest_Activated_Switch3/Dialog_Interact"]
+script = ExtResource("13_kewy1")
+text = "感谢你找到我的笛子！"
+npc_info = ExtResource("15_1cdar")
+metadata/_custom_type_script = "uid://cqdnfbqkrusmx"
+
+[node name="Label" type="Label" parent="."]
+z_index = -5
+offset_left = 488.0
+offset_top = 275.0
+offset_right = 600.0
+offset_bottom = 342.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 32
+text = "   W
+A  S  D"
+
+[node name="Label2" type="Label" parent="."]
+z_index = -5
+offset_left = 480.0
+offset_top = 351.0
+offset_right = 608.0
+offset_bottom = 383.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 32
+text = "控制移动"

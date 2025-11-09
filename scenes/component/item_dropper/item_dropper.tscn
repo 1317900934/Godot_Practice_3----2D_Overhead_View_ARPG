@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1kumqmsvug7d"]
+
+[ext_resource type="Script" uid="uid://1k8aeben05pl" path="res://scenes/component/item_dropper/item_dropper.gd" id="1_qovv2"]
+[ext_resource type="AudioStream" uid="uid://dso80gv8c0x0w" path="res://assets/audio/dungeon_discovery.wav" id="2_25pid"]
+[ext_resource type="PackedScene" uid="uid://14ufjgvxo1ul" path="res://scenes/component/persistent_data_handler/persistent_data_handler.tscn" id="2_y4cal"]
+
+[node name="Item_Dropper" type="Node2D"]
+script = ExtResource("1_qovv2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+
+[node name="Label" type="Label" parent="Sprite2D"]
+offset_left = -32.0
+offset_top = -27.0
+offset_right = 32.0
+offset_bottom = -11.0
+theme_override_constants/outline_size = 2
+text = "物品掉落"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_25pid")
+bus = &"SFX"
+
+[node name="Persistent_Data_Handler" parent="." instance=ExtResource("2_y4cal")]

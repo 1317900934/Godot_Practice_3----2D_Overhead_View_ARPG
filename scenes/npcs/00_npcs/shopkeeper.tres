@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="NPC_Resource" load_steps=4 format=3 uid="uid://dh8p4b4ikxpgm"]
+
+[ext_resource type="Texture2D" uid="uid://hht5eejiah0s" path="res://assets/shopkeeper/portrait_placeholder.png" id="1_e7drm"]
+[ext_resource type="Script" uid="uid://b83y62gbulofv" path="res://scenes/npcs/npc_resource.gd" id="1_e8q4p"]
+[ext_resource type="Texture2D" uid="uid://38s1xk0cym48" path="res://assets/shopkeeper/shopkeeper.png" id="2_cyegm"]
+
+[resource]
+script = ExtResource("1_e8q4p")
+npc_name = "神秘“人”"
+sprite = ExtResource("2_cyegm")
+portrait = ExtResource("1_e7drm")
+dialog_audio_pitch = 1.5
+metadata/_custom_type_script = "uid://b83y62gbulofv"

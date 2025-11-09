@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://daove425ulbae"]
+
+[ext_resource type="Script" uid="uid://0i4k7phiyrkg" path="res://global/global_effects/damage_text.gd" id="1_tagwh"]
+
+[node name="Damage_Text" type="Node2D"]
+z_index = 10
+script = ExtResource("1_tagwh")
+
+[node name="Label" type="Label" parent="."]
+modulate = Color(4.196808, 4.196808, 4.196808, 1)
+offset_left = -33.0
+offset_top = -16.0
+offset_right = 33.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.3137255)
+theme_override_constants/shadow_offset_x = 0
+theme_override_font_sizes/font_size = 14
+text = "999"
+horizontal_alignment = 1
+vertical_alignment = 1

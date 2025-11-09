@@ -1,0 +1,156 @@
+[gd_scene load_steps=16 format=3 uid="uid://cix5soebjmph1"]
+
+[ext_resource type="Texture2D" uid="uid://cgq6cv7s77mt2" path="res://assets/sign_hud.png" id="1_nbeth"]
+[ext_resource type="Script" uid="uid://d1b1r13kkgx5v" path="res://scenes/gui/sign_hud/sign_hud.gd" id="1_rcu0h"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rcu0h"]
+load_path = "res://.godot/imported/return.png-3bb6f46aa3ea3b393dd48198ee5bb545.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2f463"]
+atlas = SubResource("CompressedTexture2D_rcu0h")
+region = Rect2(16, 13, 40, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8peyq"]
+texture = SubResource("AtlasTexture_2f463")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6jk02"]
+load_path = "res://.godot/imported/return.png-3bb6f46aa3ea3b393dd48198ee5bb545.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rcu0h"]
+atlas = SubResource("CompressedTexture2D_6jk02")
+region = Rect2(16, 13, 40, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2f463"]
+texture = SubResource("AtlasTexture_rcu0h")
+modulate_color = Color(2.518074, 2.518074, 2.518074, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8peyq"]
+load_path = "res://.godot/imported/return.png-3bb6f46aa3ea3b393dd48198ee5bb545.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_48j3f"]
+atlas = SubResource("CompressedTexture2D_8peyq")
+region = Rect2(16, 13, 40, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4gyfm"]
+texture = SubResource("AtlasTexture_48j3f")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6e4bn"]
+load_path = "res://.godot/imported/return.png-3bb6f46aa3ea3b393dd48198ee5bb545.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6s40r"]
+atlas = SubResource("CompressedTexture2D_6e4bn")
+region = Rect2(16, 13, 40, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c68xn"]
+texture = SubResource("AtlasTexture_6s40r")
+
+[sub_resource type="Theme" id="Theme_1ocxy"]
+Button/styles/focus = SubResource("StyleBoxTexture_8peyq")
+Button/styles/hover = SubResource("StyleBoxTexture_2f463")
+Button/styles/normal = SubResource("StyleBoxTexture_4gyfm")
+Button/styles/pressed = SubResource("StyleBoxTexture_c68xn")
+
+[node name="Sign_Hud" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_rcu0h")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.13335153, 0.13335153, 0.13335153, 0.56200004)
+
+[node name="Button" type="Button" parent="Control"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 320.0
+offset_top = -231.0
+offset_right = 404.0
+offset_bottom = -162.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_1ocxy")
+
+[node name="Label" type="Label" parent="Control/Button"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.0
+offset_top = 0.5
+offset_right = 6.0
+offset_bottom = 21.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 2
+theme_override_font_sizes/font_size = 20
+text = "返回"
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -472.0
+offset_top = -218.0
+offset_right = 471.24304
+offset_bottom = 271.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_nbeth")
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -255.0
+offset_top = -95.0
+offset_right = 255.0
+offset_bottom = 145.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.9519593, 0.8929988, 0.82586724, 1)
+theme_override_colors/font_shadow_color = Color(0.40018785, 0.2784093, 0.22376983, 0.84300005)
+theme_override_colors/font_outline_color = Color(0.39588127, 0.27619392, 0.21802102, 0.89100003)
+theme_override_constants/line_spacing = 10
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 9
+theme_override_constants/shadow_outline_size = 4
+theme_override_font_sizes/font_size = 32
+text = "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+clip_text = true
+text_overrun_behavior = 4

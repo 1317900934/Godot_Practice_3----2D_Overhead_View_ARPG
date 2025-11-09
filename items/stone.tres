@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Item_Data" load_steps=5 format=3 uid="uid://cjcblbr3o8qt4"]
+
+[ext_resource type="Script" uid="uid://c4ouypvcghhlq" path="res://items/scripts/item_data.gd" id="1_becff"]
+[ext_resource type="Script" uid="uid://6ifj5w0064nr" path="res://items/item_effects/item_effect.gd" id="1_uj5p3"]
+[ext_resource type="Texture2D" uid="uid://bgatt5hvh7p7q" path="res://assets/graphic/items.png" id="2_mwerj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uj5p3"]
+atlas = ExtResource("2_mwerj")
+region = Rect2(64, 0, 32, 32)
+
+[resource]
+script = ExtResource("1_becff")
+name = "石子"
+description = "一个能投入湖面泛起涟漪的石子。"
+texture = SubResource("AtlasTexture_uj5p3")
+price = 5
+metadata/_custom_type_script = "uid://c4ouypvcghhlq"

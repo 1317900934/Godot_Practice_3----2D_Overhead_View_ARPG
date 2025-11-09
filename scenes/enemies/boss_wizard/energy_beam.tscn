@@ -1,0 +1,245 @@
+[gd_scene load_steps=13 format=3 uid="uid://dpdcuf518bu63"]
+
+[ext_resource type="Script" uid="uid://cnwexubpv1yxd" path="res://scenes/enemies/boss_wizard/energy_beam.gd" id="1_cc0sy"]
+[ext_resource type="Material" uid="uid://djw5g20dn5ra5" path="res://shader_and_material/energy_orb.tres" id="2_nwowu"]
+[ext_resource type="Texture2D" uid="uid://bn6l2hbf5vm74" path="res://assets/wizard_boss/energy-beam.png" id="2_xvxb7"]
+[ext_resource type="Script" uid="uid://11bcxhfcyfa0" path="res://scenes/enemies/boss_wizard/energy_beam_sprite.gd" id="4_hdstv"]
+[ext_resource type="Texture2D" uid="uid://caf3dtcx0pnsk" path="res://assets/wizard_boss/energy-beam-large.png" id="5_ppk7g"]
+[ext_resource type="PackedScene" uid="uid://uj0q32mxoiqp" path="res://scenes/component/hit_box/hit_box.tscn" id="6_1jn7d"]
+[ext_resource type="AudioStream" uid="uid://ccmgujfdvq2is" path="res://assets/wizard_boss/boss_beam.wav" id="6_cc0sy"]
+
+[sub_resource type="Animation" id="Animation_cc0sy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hit_Box:monitoring")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Indicator:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Beam:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Indicator:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.470588)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Beam:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_awjnv"]
+resource_name = "attack"
+length = 3.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hit_Box:monitoring")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.9, 3.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Indicator:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Beam:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.8, 3.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Indicator:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.470588), Color(1, 1, 1, 0), Color(1, 1, 1, 0.470588), Color(1, 1, 1, 0), Color(1, 1, 1, 0.470588), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Beam:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.8, 2, 3, 3.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/5/type = "audio"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AudioStreamPlayer2D")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("6_cc0sy")
+}],
+"times": PackedFloat32Array(1.9)
+}
+tracks/5/use_blend = true
+
+[sub_resource type="Animation" id="Animation_1jn7d"]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hit_Box:monitoring")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Indicator:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Beam:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_awjnv"]
+_data = {
+&"RESET": SubResource("Animation_cc0sy"),
+&"attack": SubResource("Animation_awjnv"),
+&"default": SubResource("Animation_1jn7d")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cc0sy"]
+size = Vector2(1024, 25)
+
+[node name="Energy_Beam" type="Node2D"]
+script = ExtResource("1_cc0sy")
+
+[node name="Indicator" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.470588)
+z_index = 1
+texture_repeat = 2
+material = ExtResource("2_nwowu")
+texture = ExtResource("2_xvxb7")
+region_enabled = true
+region_rect = Rect2(0, 0, 1024, 16)
+script = ExtResource("4_hdstv")
+
+[node name="Beam" type="Sprite2D" parent="."]
+visible = false
+z_index = 1
+texture_repeat = 2
+material = ExtResource("2_nwowu")
+scale = Vector2(1, 0.680412)
+texture = ExtResource("5_ppk7g")
+region_enabled = true
+region_rect = Rect2(0, -1, 1024, 97)
+script = ExtResource("4_hdstv")
+speed = 400.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+volume_db = -15.0
+bus = &"SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_awjnv")
+}
+autoplay = "default"
+
+[node name="Hit_Box" parent="." instance=ExtResource("6_1jn7d")]
+collision_mask = 2
+monitoring = false
+damage = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hit_Box"]
+shape = SubResource("RectangleShape2D_cc0sy")
+debug_color = Color(0.888568, 0.283418, 0.430712, 0.42)

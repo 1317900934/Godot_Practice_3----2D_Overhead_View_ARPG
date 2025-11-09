@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cmmy8j6lj8lrp"]
+
+[ext_resource type="PackedScene" uid="uid://thvad5foc2gg" path="res://scenes/objects/pot/pot.tscn" id="1_5u3ri"]
+[ext_resource type="PackedScene" uid="uid://p2qo0n7hdbl" path="res://scenes/component/throwable/throwable.tscn" id="3_ih0fq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_53ryh"]
+size = Vector2(20, 16)
+
+[node name="Pot_Throwable" instance=ExtResource("1_5u3ri")]
+
+[node name="Throwable" parent="." index="5" instance=ExtResource("3_ih0fq")]
+gravity_strength = 650.0
+throw_height_strength = 50.0
+throw_starting_height = 40.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Throwable" index="1"]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_53ryh")
+debug_color = Color(0.501961, 0.992157, 0.494118, 0.117647)

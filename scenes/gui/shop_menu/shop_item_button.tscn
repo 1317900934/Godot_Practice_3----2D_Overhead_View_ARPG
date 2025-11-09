@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://cgviu4g1phs2o"]
+
+[ext_resource type="Texture2D" uid="uid://bgatt5hvh7p7q" path="res://assets/graphic/items.png" id="1_imf8q"]
+[ext_resource type="Script" uid="uid://c38horo75ba6j" path="res://scenes/gui/shop_menu/shop_item_button.gd" id="1_ngndt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ngndt"]
+atlas = ExtResource("1_imf8q")
+region = Rect2(0, 0, 32, 32)
+
+[node name="Shop_Item_Button" type="Button"]
+custom_minimum_size = Vector2(400, 50)
+script = ExtResource("1_ngndt")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 18.0
+offset_right = 273.0
+offset_bottom = 34.0
+text = "商品标题商品标题商品标题商品标题商品标题"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 290.0
+offset_top = 18.0
+offset_right = 339.0
+offset_bottom = 34.0
+text = "价格："
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Price" type="Label" parent="."]
+layout_mode = 0
+offset_left = 340.0
+offset_top = 18.0
+offset_right = 380.0
+offset_bottom = 34.0
+text = "999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 6.0
+offset_right = 42.0
+offset_bottom = 38.0
+scale = Vector2(1.2, 1.2)
+texture = SubResource("AtlasTexture_ngndt")
+stretch_mode = 3

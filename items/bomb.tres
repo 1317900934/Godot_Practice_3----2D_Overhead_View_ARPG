@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Item_Data" load_steps=5 format=3 uid="uid://bw0y7kbswt816"]
+
+[ext_resource type="Script" uid="uid://6ifj5w0064nr" path="res://items/item_effects/item_effect.gd" id="1_0xhi2"]
+[ext_resource type="Script" uid="uid://c4ouypvcghhlq" path="res://items/scripts/item_data.gd" id="2_ko2cj"]
+[ext_resource type="Texture2D" uid="uid://dovta37jsiplf" path="res://assets/abilities/items_02.png" id="3_ko2cj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r4rmj"]
+atlas = ExtResource("3_ko2cj")
+region = Rect2(0, 0, 32, 32)
+
+[resource]
+script = ExtResource("2_ko2cj")
+name = "炸弹"
+description = "booooooom！！！"
+texture = SubResource("AtlasTexture_r4rmj")
+metadata/_custom_type_script = "uid://c4ouypvcghhlq"

@@ -1,0 +1,132 @@
+[gd_scene load_steps=5 format=3 uid="uid://dyngkxhd4i10m"]
+
+[ext_resource type="Texture2D" uid="uid://bgatt5hvh7p7q" path="res://assets/graphic/items.png" id="1_owhha"]
+[ext_resource type="Script" uid="uid://dc0lw71cwougx" path="res://scenes/gui/pause_menu/stats/stats.gd" id="2_ybfvc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8puhg"]
+atlas = ExtResource("1_owhha")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3eufu"]
+content_margin_left = 15.0
+content_margin_top = 15.0
+content_margin_right = 15.0
+content_margin_bottom = 15.0
+texture = SubResource("AtlasTexture_8puhg")
+texture_margin_left = 14.0
+texture_margin_top = 14.0
+texture_margin_right = 14.0
+texture_margin_bottom = 14.0
+
+[node name="Stats" type="PanelContainer"]
+offset_right = 249.33331
+offset_bottom = 119.01596
+scale = Vector2(1.5, 1.504)
+theme_override_styles/panel = SubResource("StyleBoxTexture_3eufu")
+script = ExtResource("2_ybfvc")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(60, 18)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.86713904, 0.71823406, 0.40555525, 1)
+theme_override_colors/font_shadow_color = Color(0.09320182, 0.09320182, 0.09320182, 0.50200003)
+text = "等级："
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(30, 18)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(60, 18)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.86713904, 0.71823406, 0.40555525, 1)
+theme_override_colors/font_shadow_color = Color(0.09320182, 0.09320182, 0.09320182, 0.50200003)
+text = "经验值："
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(30, 18)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(85, 18)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.86713904, 0.71823406, 0.40555525, 1)
+theme_override_colors/font_shadow_color = Color(0.09320182, 0.09320182, 0.09320182, 0.50200003)
+text = "攻击力："
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(50, 18)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(50, 18)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "+99"
+vertical_alignment = 1
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer4"]
+custom_minimum_size = Vector2(85, 18)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.86713904, 0.71823406, 0.40555525, 1)
+theme_override_colors/font_shadow_color = Color(0.09320182, 0.09320182, 0.09320182, 0.50200003)
+text = "防御力："
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer4"]
+custom_minimum_size = Vector2(50, 18)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer4"]
+custom_minimum_size = Vector2(50, 18)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "+99"
+vertical_alignment = 1

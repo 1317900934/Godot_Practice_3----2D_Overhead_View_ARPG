@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Item_Data" load_steps=5 format=3 uid="uid://06j5q71y7cec"]
+
+[ext_resource type="Script" uid="uid://6ifj5w0064nr" path="res://items/item_effects/item_effect.gd" id="1_l1uoy"]
+[ext_resource type="Script" uid="uid://c4ouypvcghhlq" path="res://items/scripts/item_data.gd" id="2_or3v6"]
+[ext_resource type="Texture2D" uid="uid://dovta37jsiplf" path="res://assets/abilities/items_02.png" id="3_or3v6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ig1r"]
+atlas = ExtResource("3_or3v6")
+region = Rect2(32, 0, 32, 32)
+
+[resource]
+script = ExtResource("2_or3v6")
+name = "箭矢"
+description = "一发入魂！"
+texture = SubResource("AtlasTexture_8ig1r")
+metadata/_custom_type_script = "uid://c4ouypvcghhlq"

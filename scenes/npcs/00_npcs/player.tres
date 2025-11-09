@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="NPC_Resource" load_steps=3 format=3 uid="uid://b1yogo38uh3np"]
+
+[ext_resource type="Texture2D" uid="uid://dcoedd60dlvgf" path="res://assets/npc_and_dialog/sprites/portraits/hero_portrait.png" id="1_7cssl"]
+[ext_resource type="Script" uid="uid://b83y62gbulofv" path="res://scenes/npcs/npc_resource.gd" id="1_mgfom"]
+
+[resource]
+script = ExtResource("1_mgfom")
+npc_name = "你"
+portrait = ExtResource("1_7cssl")
+dialog_audio_pitch = 1.04
+metadata/_custom_type_script = "uid://b83y62gbulofv"

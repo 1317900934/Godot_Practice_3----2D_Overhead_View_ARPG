@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://db1nqrkdqn2b7"]
+
+[ext_resource type="Script" uid="uid://by6cql2fdotgj" path="res://scenes/enemies/vision_area.gd" id="1_6rpml"]
+
+[node name="Vision_Area" type="Area2D"]
+collision_layer = 0
+monitorable = false
+script = ExtResource("1_6rpml")

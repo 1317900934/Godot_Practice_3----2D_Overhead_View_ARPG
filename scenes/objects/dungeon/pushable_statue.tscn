@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://dx5ewlic2fd06"]
+
+[ext_resource type="Script" uid="uid://dn8w3gx07mfvj" path="res://scenes/objects/dungeon/pushable_statue.gd" id="1_e6i7r"]
+[ext_resource type="Texture2D" uid="uid://cguot6d7kcgbn" path="res://assets/graphic/dungeon_props.png" id="2_b03ax"]
+[ext_resource type="AudioStream" uid="uid://cqw7803m5evgu" path="res://assets/audio/push_stone.wav" id="3_b03ax"]
+[ext_resource type="PackedScene" uid="uid://14ufjgvxo1ul" path="res://scenes/component/persistent_data_handler/persistent_data_handler.tscn" id="4_cwj70"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cwj70"]
+size = Vector2(28, 14)
+
+[node name="Pushable_Statue" type="RigidBody2D"]
+collision_layer = 16
+collision_mask = 273
+gravity_scale = 0.0
+lock_rotation = true
+script = ExtResource("1_e6i7r")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, -17)
+texture = ExtResource("2_b03ax")
+region_enabled = true
+region_rect = Rect2(384, 0, 32, 48)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_cwj70")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_b03ax")
+bus = &"SFX"
+
+[node name="On_Target" parent="." instance=ExtResource("4_cwj70")]

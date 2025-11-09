@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://clxjw2xdwvyoj"]
+
+[ext_resource type="Texture2D" uid="uid://d2tpiht8pth75" path="res://assets/abilities/arrow.png" id="1_abkhu"]
+[ext_resource type="Script" uid="uid://cnv60bfanfqu0" path="res://scenes/player/abilities/arrow/arrow.gd" id="1_xvrqr"]
+[ext_resource type="AudioStream" uid="uid://b8ecmpu2orjrr" path="res://assets/abilities/bow_fire.wav" id="2_lui5u"]
+[ext_resource type="PackedScene" uid="uid://uj0q32mxoiqp" path="res://scenes/component/hit_box/hit_box.tscn" id="2_xvrqr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lui5u"]
+size = Vector2(28, 10)
+
+[node name="Arrow" type="Node2D"]
+script = ExtResource("1_xvrqr")
+move_speed = 400.0
+fire_audio = ExtResource("2_lui5u")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 5
+position = Vector2(0, -17)
+texture = ExtResource("1_abkhu")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.5)
+z_index = 5
+texture = ExtResource("1_abkhu")
+
+[node name="Hit_Box" parent="." instance=ExtResource("2_xvrqr")]
+position = Vector2(0, -17)
+damage = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hit_Box"]
+shape = SubResource("RectangleShape2D_lui5u")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

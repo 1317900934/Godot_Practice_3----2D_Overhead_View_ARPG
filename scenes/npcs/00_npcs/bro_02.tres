@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="NPC_Resource" load_steps=4 format=3 uid="uid://deopptq78xbhy"]
+
+[ext_resource type="Texture2D" uid="uid://cg653kxv43hm3" path="res://assets/npc_and_dialog/sprites/portraits/npc_portrait_02.png" id="1_k6yab"]
+[ext_resource type="Script" uid="uid://b83y62gbulofv" path="res://scenes/npcs/npc_resource.gd" id="2_lm13g"]
+[ext_resource type="Texture2D" uid="uid://cjnbg0b0edxhy" path="res://assets/npc_and_dialog/sprites/npc_sprite_02.png" id="3_lm13g"]
+
+[resource]
+script = ExtResource("2_lm13g")
+npc_name = "小老弟"
+sprite = ExtResource("3_lm13g")
+portrait = ExtResource("1_k6yab")
+dialog_audio_pitch = 1.2
+metadata/_custom_type_script = "uid://b83y62gbulofv"

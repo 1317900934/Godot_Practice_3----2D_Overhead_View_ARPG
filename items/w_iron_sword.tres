@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Equipable_Item_Data" load_steps=8 format=3 uid="uid://u2eimuy5evrq"]
+
+[ext_resource type="Script" uid="uid://6ifj5w0064nr" path="res://items/item_effects/item_effect.gd" id="1_dt48t"]
+[ext_resource type="Script" uid="uid://xmauva4h35so" path="res://items/scripts/equipable_item_modifier.gd" id="2_7pfk8"]
+[ext_resource type="Script" uid="uid://bx8f3a5618eyp" path="res://items/scripts/equipable_item_data.gd" id="2_gtf66"]
+[ext_resource type="Texture2D" uid="uid://chd34ky5s7v2e" path="res://assets/player_equipment/gear.png" id="3_gtf66"]
+[ext_resource type="Texture2D" uid="uid://dlvsjxkf7hoic" path="res://assets/player_equipment/player_sprite_sword.png" id="4_iql6b"]
+
+[sub_resource type="Resource" id="Resource_7pfk8"]
+script = ExtResource("2_7pfk8")
+type = 1
+metadata/_custom_type_script = "uid://xmauva4h35so"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7pfk8"]
+atlas = ExtResource("3_gtf66")
+region = Rect2(32, 0, 32, 32)
+
+[resource]
+script = ExtResource("2_gtf66")
+modifiers = Array[ExtResource("2_7pfk8")]([SubResource("Resource_7pfk8")])
+sprite_texture = ExtResource("4_iql6b")
+name = "铁剑"
+description = "一把标准的铁剑，锋利而冷酷。"
+texture = SubResource("AtlasTexture_7pfk8")
+metadata/_custom_type_script = "uid://bx8f3a5618eyp"

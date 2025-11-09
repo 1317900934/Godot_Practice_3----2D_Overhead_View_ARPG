@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=3 format=3 uid="uid://bk2je7qli3jp3"]
+
+[ext_resource type="Script" uid="uid://bg62aowdu1uj0" path="res://quests/scripts/quest_reward_item.gd" id="1_ywomn"]
+[ext_resource type="Script" uid="uid://bjoer0si2f6kr" path="res://quests/scripts/quest_resource.gd" id="2_5svu2"]
+
+[resource]
+script = ExtResource("2_5svu2")
+title = "测试任务"
+description = "测试测试测试"
+steps = Array[String](["测试1"])
+reward_xp = 10
+reward_items = Array[ExtResource("1_ywomn")]([null])
+metadata/_custom_type_script = "uid://bjoer0si2f6kr"

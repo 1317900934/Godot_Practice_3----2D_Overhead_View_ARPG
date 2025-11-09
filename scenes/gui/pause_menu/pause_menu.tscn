@@ -1,0 +1,627 @@
+[gd_scene load_steps=27 format=3 uid="uid://wo1pxwsi0qtb"]
+
+[ext_resource type="Script" uid="uid://bhe6voq8v06i" path="res://scenes/gui/pause_menu/pause_menu.gd" id="1_dlfbw"]
+[ext_resource type="Texture2D" uid="uid://bgatt5hvh7p7q" path="res://assets/graphic/items.png" id="2_bcka5"]
+[ext_resource type="Script" uid="uid://cgk8sd713pfhg" path="res://scenes/gui/pause_menu/inventory/scripts/inventory_UI.gd" id="3_3eufu"]
+[ext_resource type="PackedScene" uid="uid://oto3b0xund7y" path="res://scenes/gui/pause_menu/inventory/inventory_slot.tscn" id="3_8puhg"]
+[ext_resource type="Resource" uid="uid://x1vs02173ex0" path="res://scenes/gui/pause_menu/inventory/player_inventory.tres" id="4_86vop"]
+[ext_resource type="Script" uid="uid://b4t2nrx8wctyg" path="res://scenes/gui/pause_menu/quests/quest_ui.gd" id="6_cnsw5"]
+[ext_resource type="PackedScene" uid="uid://ppcpo4d5q5a" path="res://scenes/gui/pause_menu/quests/quest_item.tscn" id="6_eayoq"]
+[ext_resource type="PackedScene" uid="uid://dyngkxhd4i10m" path="res://scenes/gui/pause_menu/stats/stats.tscn" id="6_h83kn"]
+[ext_resource type="Texture2D" uid="uid://chd34ky5s7v2e" path="res://assets/player_equipment/gear.png" id="6_uyr5p"]
+[ext_resource type="Texture2D" uid="uid://jc77mrlwjiba" path="res://assets/abilities/ability-icons.png" id="8_5u4sf"]
+[ext_resource type="PackedScene" uid="uid://f5xnqwgvk1kh" path="res://scenes/gui/pause_menu/quests/quest_step_item.tscn" id="8_7q5pc"]
+[ext_resource type="Script" uid="uid://bq6bd8ljggjqh" path="res://scenes/gui/pause_menu/inventory/scripts/gear_item_button.gd" id="8_ors4i"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tj6i6"]
+atlas = ExtResource("2_bcka5")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3eufu"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 13.0
+texture = SubResource("AtlasTexture_tj6i6")
+texture_margin_left = 14.0
+texture_margin_top = 14.0
+texture_margin_right = 14.0
+texture_margin_bottom = 14.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5u4sf"]
+atlas = ExtResource("6_uyr5p")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ors4i"]
+atlas = ExtResource("6_uyr5p")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uyr5p"]
+atlas = ExtResource("6_uyr5p")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vytwp"]
+atlas = ExtResource("6_uyr5p")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m0ush"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8710923, 0.6431228, 0.11020992, 0.9411765)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="Theme" id="Theme_w7dlm"]
+Button/styles/focus = SubResource("StyleBoxFlat_m0ush")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qiuws"]
+atlas = ExtResource("8_5u4sf")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wa205"]
+atlas = ExtResource("8_5u4sf")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5u4sf"]
+load_path = "res://.godot/imported/ability-icons.png-f1b1cea99a08ff1f3659a5ecc0cbcbdc.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1pde7"]
+atlas = SubResource("CompressedTexture2D_5u4sf")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ors4i"]
+load_path = "res://.godot/imported/ability-icons.png-f1b1cea99a08ff1f3659a5ecc0cbcbdc.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ch68"]
+atlas = SubResource("CompressedTexture2D_ors4i")
+region = Rect2(0, 1, 32, 32)
+
+[node name="Pause_Menu" type="CanvasLayer"]
+process_mode = 3
+layer = 2
+script = ExtResource("1_dlfbw")
+
+[node name="Control" type="Control" parent="."]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.196078, 0.196078, 0.196078, 0.862745)
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 784.00006
+offset_top = 67.0
+offset_right = -91.99994
+offset_bottom = -460.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.64, 2.64)
+pivot_offset = Vector2(55, 11.5)
+theme_override_font_sizes/font_size = 12
+text = "【游戏已暂停】"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Control"]
+max_polyphony = 5
+bus = &"SFX"
+
+[node name="TabContainer" type="TabContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/tab_separation = 10
+theme_override_font_sizes/font_size = 30
+tab_alignment = 1
+current_tab = 0
+
+[node name="库存" type="Control" parent="Control/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Inventory" type="PanelContainer" parent="Control/TabContainer/库存"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.54800004
+anchor_bottom = 1.0
+offset_left = 189.0
+offset_top = 22.0
+offset_right = -129.30225
+offset_bottom = -224.33334
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.8, 1.8)
+theme_override_styles/panel = SubResource("StyleBoxTexture_3eufu")
+
+[node name="GridContainer" type="GridContainer" parent="Control/TabContainer/库存/Inventory"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 4
+columns = 5
+script = ExtResource("3_3eufu")
+data = ExtResource("4_86vop")
+
+[node name="Inventory_Slot" parent="Control/TabContainer/库存/Inventory/GridContainer" instance=ExtResource("3_8puhg")]
+layout_mode = 2
+
+[node name="Inventory_Slot2" parent="Control/TabContainer/库存/Inventory/GridContainer" instance=ExtResource("3_8puhg")]
+layout_mode = 2
+
+[node name="Inventory_Slot3" parent="Control/TabContainer/库存/Inventory/GridContainer" instance=ExtResource("3_8puhg")]
+layout_mode = 2
+
+[node name="Inventory_Slot4" parent="Control/TabContainer/库存/Inventory/GridContainer" instance=ExtResource("3_8puhg")]
+layout_mode = 2
+
+[node name="Inventory_Slot5" parent="Control/TabContainer/库存/Inventory/GridContainer" instance=ExtResource("3_8puhg")]
+layout_mode = 2
+
+[node name="Inventory_Slot6" parent="Control/TabContainer/库存/Inventory/GridContainer" instance=ExtResource("3_8puhg")]
+layout_mode = 2
+
+[node name="Inventory_Slot7" parent="Control/TabContainer/库存/Inventory/GridContainer" instance=ExtResource("3_8puhg")]
+layout_mode = 2
+
+[node name="Inventory_Slot8" parent="Control/TabContainer/库存/Inventory/GridContainer" instance=ExtResource("3_8puhg")]
+layout_mode = 2
+
+[node name="Inventory_Slot9" parent="Control/TabContainer/库存/Inventory/GridContainer" instance=ExtResource("3_8puhg")]
+layout_mode = 2
+
+[node name="Inventory_Slot10" parent="Control/TabContainer/库存/Inventory/GridContainer" instance=ExtResource("3_8puhg")]
+layout_mode = 2
+
+[node name="Inventory_Slot11" parent="Control/TabContainer/库存/Inventory/GridContainer" instance=ExtResource("3_8puhg")]
+layout_mode = 2
+
+[node name="Inventory_Slot12" parent="Control/TabContainer/库存/Inventory/GridContainer" instance=ExtResource("3_8puhg")]
+layout_mode = 2
+
+[node name="Inventory_Slot13" parent="Control/TabContainer/库存/Inventory/GridContainer" instance=ExtResource("3_8puhg")]
+layout_mode = 2
+
+[node name="Inventory_Slot14" parent="Control/TabContainer/库存/Inventory/GridContainer" instance=ExtResource("3_8puhg")]
+layout_mode = 2
+
+[node name="Inventory_Slot15" parent="Control/TabContainer/库存/Inventory/GridContainer" instance=ExtResource("3_8puhg")]
+layout_mode = 2
+
+[node name="Inventory_Slot16" parent="Control/TabContainer/库存/Inventory/GridContainer" instance=ExtResource("3_8puhg")]
+layout_mode = 2
+
+[node name="Inventory_Slot17" parent="Control/TabContainer/库存/Inventory/GridContainer" instance=ExtResource("3_8puhg")]
+layout_mode = 2
+
+[node name="Inventory_Slot18" parent="Control/TabContainer/库存/Inventory/GridContainer" instance=ExtResource("3_8puhg")]
+layout_mode = 2
+
+[node name="Inventory_Slot19" parent="Control/TabContainer/库存/Inventory/GridContainer" instance=ExtResource("3_8puhg")]
+layout_mode = 2
+
+[node name="Inventory_Slot20" parent="Control/TabContainer/库存/Inventory/GridContainer" instance=ExtResource("3_8puhg")]
+layout_mode = 2
+
+[node name="Inventory_Label" type="Label" parent="Control/TabContainer/库存"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.5
+anchor_bottom = 0.275
+offset_left = 256.0
+offset_top = 44.0
+offset_bottom = -57.7
+scale = Vector2(1.2, 1.2)
+pivot_offset = Vector2(55, 11.5)
+text = "持有物（部分物品可右键使用）"
+horizontal_alignment = 1
+
+[node name="Item_Description" type="Label" parent="Control/TabContainer/库存"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 179.0
+offset_top = 356.0
+offset_right = -179.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/paragraph_spacing = 3
+text = "啊啊啊啊啊啊啊啊啊啊
+啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Equipment" type="PanelContainer" parent="Control/TabContainer/库存"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.019
+offset_left = 571.0
+offset_top = 187.0
+offset_right = -208.11115
+offset_bottom = -159.13202
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.8, 1.8)
+theme_override_styles/panel = SubResource("StyleBoxTexture_3eufu")
+
+[node name="GridContainer" type="GridContainer" parent="Control/TabContainer/库存/Equipment"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 4
+columns = 4
+
+[node name="Armor_Slot" parent="Control/TabContainer/库存/Equipment/GridContainer" instance=ExtResource("3_8puhg")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Weapon_Slot" parent="Control/TabContainer/库存/Equipment/GridContainer" instance=ExtResource("3_8puhg")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Amulet_Slot" parent="Control/TabContainer/库存/Equipment/GridContainer" instance=ExtResource("3_8puhg")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Ring_Slot" parent="Control/TabContainer/库存/Equipment/GridContainer" instance=ExtResource("3_8puhg")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Icon" type="Control" parent="Control/TabContainer/库存/Equipment"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Armor" type="TextureRect" parent="Control/TabContainer/库存/Equipment/Icon"]
+modulate = Color(0.6263165, 0.62631655, 0.62631655, 1)
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
+offset_left = 0.5555668
+offset_top = 8.888892
+offset_right = 32.555565
+offset_bottom = 40.888893
+texture = SubResource("AtlasTexture_5u4sf")
+stretch_mode = 3
+
+[node name="Weapon" type="TextureRect" parent="Control/TabContainer/库存/Equipment/Icon"]
+modulate = Color(0.6263165, 0.62631655, 0.62631655, 1)
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
+offset_left = 42.77778
+offset_top = 8.888896
+offset_right = 74.77778
+offset_bottom = 40.888897
+texture = SubResource("AtlasTexture_ors4i")
+stretch_mode = 3
+
+[node name="Amulet" type="TextureRect" parent="Control/TabContainer/库存/Equipment/Icon"]
+modulate = Color(0.6263165, 0.62631655, 0.62631655, 1)
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
+offset_left = 84.444435
+offset_top = 8.888892
+offset_right = 116.444435
+offset_bottom = 40.888893
+texture = SubResource("AtlasTexture_uyr5p")
+stretch_mode = 3
+
+[node name="Ring" type="TextureRect" parent="Control/TabContainer/库存/Equipment/Icon"]
+modulate = Color(0.6263165, 0.62631655, 0.62631655, 1)
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
+offset_left = 126.666664
+offset_top = 8.888894
+offset_right = 158.66666
+offset_bottom = 40.888893
+texture = SubResource("AtlasTexture_vytwp")
+stretch_mode = 3
+
+[node name="Equipment_Label" type="Label" parent="Control/TabContainer/库存"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.5
+anchor_bottom = 0.275
+offset_left = 610.6
+offset_top = 209.00002
+offset_right = 354.59998
+offset_bottom = 107.30001
+scale = Vector2(1.2, 1.2)
+pivot_offset = Vector2(55, 11.5)
+theme_override_colors/font_color = Color(0.8666667, 0.7176471, 0.40392157, 1)
+text = "已装备物品"
+horizontal_alignment = 1
+
+[node name="Stats" parent="Control/TabContainer/库存" instance=ExtResource("6_h83kn")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 91.59985
+offset_top = 24.0
+offset_right = 341.59985
+offset_bottom = 138.35152
+grow_horizontal = 2
+scale = Vector2(1.3, 1.303)
+
+[node name="Ability" type="PanelContainer" parent="Control/TabContainer/库存"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 59.0
+offset_top = 22.0
+offset_right = -833.7778
+offset_bottom = -224.33334
+scale = Vector2(1.8, 1.8)
+theme_override_styles/panel = SubResource("StyleBoxTexture_3eufu")
+
+[node name="Ability_Grid_Container" type="GridContainer" parent="Control/TabContainer/库存/Ability"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 4
+
+[node name="Control" type="Control" parent="Control/TabContainer/库存/Ability/Ability_Grid_Container"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="Inventory_Slot" type="Button" parent="Control/TabContainer/库存/Ability/Ability_Grid_Container"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme = SubResource("Theme_w7dlm")
+button_mask = 3
+script = ExtResource("8_ors4i")
+description = "朝当前方向发射一个往返攻击的回旋镖，可捎带地面上的掉落物。"
+
+[node name="TextureRect" type="TextureRect" parent="Control/TabContainer/库存/Ability/Ability_Grid_Container/Inventory_Slot"]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = SubResource("AtlasTexture_qiuws")
+stretch_mode = 3
+
+[node name="Inventory_Slot2" type="Button" parent="Control/TabContainer/库存/Ability/Ability_Grid_Container"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme = SubResource("Theme_w7dlm")
+button_mask = 3
+script = ExtResource("8_ors4i")
+description = "朝当前方向发射抓钩，触碰到特定障碍物后可快速冲向障碍物。"
+
+[node name="TextureRect" type="TextureRect" parent="Control/TabContainer/库存/Ability/Ability_Grid_Container/Inventory_Slot2"]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = SubResource("AtlasTexture_wa205")
+stretch_mode = 3
+
+[node name="Inventory_Slot3" type="Button" parent="Control/TabContainer/库存/Ability/Ability_Grid_Container"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme = SubResource("Theme_w7dlm")
+button_mask = 3
+script = ExtResource("8_ors4i")
+description = "朝当前方向发射精准的弓箭射击，对远距离敌人造成大量伤害。"
+
+[node name="TextureRect1" type="TextureRect" parent="Control/TabContainer/库存/Ability/Ability_Grid_Container/Inventory_Slot3"]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = SubResource("AtlasTexture_1pde7")
+stretch_mode = 3
+
+[node name="Arrow_Count_Label" type="Label" parent="Control/TabContainer/库存/Ability/Ability_Grid_Container/Inventory_Slot3"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = 6.0
+offset_right = 22.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.719997, 0.662398)
+theme_override_font_sizes/font_size = 16
+text = "999"
+horizontal_alignment = 2
+
+[node name="Inventory_Slot4" type="Button" parent="Control/TabContainer/库存/Ability/Ability_Grid_Container"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme = SubResource("Theme_w7dlm")
+button_mask = 3
+script = ExtResource("8_ors4i")
+description = "掏出一枚即将爆炸的炸弹准备投掷，炸弹爆炸会造成极高的范围性伤害(小心误伤自己)。"
+
+[node name="TextureRect" type="TextureRect" parent="Control/TabContainer/库存/Ability/Ability_Grid_Container/Inventory_Slot4"]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = SubResource("AtlasTexture_2ch68")
+stretch_mode = 3
+
+[node name="Bomb_Count_Label" type="Label" parent="Control/TabContainer/库存/Ability/Ability_Grid_Container/Inventory_Slot4"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = 6.0
+offset_right = 22.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.719997, 0.662398)
+theme_override_font_sizes/font_size = 16
+text = "999"
+horizontal_alignment = 2
+
+[node name="Ability_Label" type="Label" parent="Control/TabContainer/库存"]
+layout_mode = 0
+offset_left = 95.00006
+offset_top = 43.0
+offset_right = 135.00006
+offset_bottom = 59.0
+scale = Vector2(1.2, 1.2)
+text = "技能"
+horizontal_alignment = 1
+
+[node name="任务" type="Control" parent="Control/TabContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("6_cnsw5")
+metadata/_tab_index = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/TabContainer/任务"]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 43.0
+offset_right = 435.0
+offset_bottom = 380.0
+follow_focus = true
+scroll_vertical_custom_step = 50.0
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/TabContainer/任务/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/TabContainer/任务/ScrollContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Quest_Item" parent="Control/TabContainer/任务/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("6_eayoq")]
+layout_mode = 2
+
+[node name="Quest_Item2" parent="Control/TabContainer/任务/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("6_eayoq")]
+layout_mode = 2
+
+[node name="Quest_Item3" parent="Control/TabContainer/任务/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("6_eayoq")]
+layout_mode = 2
+
+[node name="Quest_Item4" parent="Control/TabContainer/任务/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("6_eayoq")]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/TabContainer/任务"]
+layout_mode = 0
+offset_left = 511.0
+offset_top = 54.0
+offset_right = 861.0
+offset_bottom = 374.0
+theme_override_constants/separation = 15
+
+[node name="Title_Label" type="Label" parent="Control/TabContainer/任务/VBoxContainer"]
+custom_minimum_size = Vector2(350, 40)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "任务标题"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+ellipsis_char = ""
+
+[node name="Spacing" type="Control" parent="Control/TabContainer/任务/VBoxContainer"]
+layout_mode = 2
+
+[node name="Quest_Step_Item" parent="Control/TabContainer/任务/VBoxContainer" instance=ExtResource("8_7q5pc")]
+custom_minimum_size = Vector2(250, 22)
+layout_mode = 2
+
+[node name="Description_lable" type="Label" parent="Control/TabContainer/任务/VBoxContainer"]
+modulate = Color(0.9303609, 0.9303609, 0.93036085, 1)
+custom_minimum_size = Vector2(350, 30)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "任务描述"
+vertical_alignment = 1
+autowrap_mode = 1
+ellipsis_char = ""
+
+[node name="Null_Lable" type="Label" parent="Control/TabContainer/任务"]
+visible = false
+modulate = Color(0.8553725, 0.8553725, 0.8553724, 1)
+layout_mode = 0
+offset_left = 358.0
+offset_top = 173.0
+offset_right = 614.0
+offset_bottom = 205.0
+theme_override_font_sizes/font_size = 32
+text = "当前没有接取任务"
+
+[node name="系统" type="Control" parent="Control/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/TabContainer/系统"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -107.5
+offset_top = -12.0
+offset_right = 107.5
+offset_bottom = 51.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+pivot_offset = Vector2(107.5, 34)
+theme_override_constants/separation = 15
+
+[node name="Button_Save" type="Button" parent="Control/TabContainer/系统/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "保存游戏"
+
+[node name="Button_Load" type="Button" parent="Control/TabContainer/系统/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "加载游戏"
+
+[node name="Button_Quit" type="Button" parent="Control/TabContainer/系统/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "返回标题界面"

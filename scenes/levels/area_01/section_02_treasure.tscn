@@ -1,0 +1,560 @@
+[gd_scene load_steps=38 format=4 uid="uid://dhn1s82xrvccv"]
+
+[ext_resource type="Script" uid="uid://bqqtoy1obei71" path="res://scenes/levels/scripts/level.gd" id="1_cckgl"]
+[ext_resource type="AudioStream" uid="uid://r8yny7a0l0of" path="res://assets/audio/example_music_01.ogg" id="2_unesh"]
+[ext_resource type="PackedScene" uid="uid://b0bdvvp3sn0w4" path="res://scenes/component/area_trigger/area_trigger.tscn" id="3_3hovy"]
+[ext_resource type="PackedScene" uid="uid://cys81dwfbhosi" path="res://quests/utility_nodes/quest_activated_switch.tscn" id="3_7p7f5"]
+[ext_resource type="PackedScene" uid="uid://cm0cg64vb4rsq" path="res://scenes/tilemaps/grass_01.tscn" id="3_vcvj6"]
+[ext_resource type="Resource" uid="uid://biupqmos7xtfq" path="res://quests/recover_lost_flute.tres" id="4_3hovy"]
+[ext_resource type="PackedScene" uid="uid://do8omoyunbmyw" path="res://scenes/levels/player_spawn.tscn" id="4_ql3cq"]
+[ext_resource type="PackedScene" uid="uid://bmrmno36abhdr" path="res://scenes/levels/level_transform.tscn" id="5_6k8sw"]
+[ext_resource type="Texture2D" uid="uid://cnkv0tx2jfiwf" path="res://assets/wizard_boss/torch.png" id="6_pjxhq"]
+[ext_resource type="PackedScene" uid="uid://bp6a3ht7m3s05" path="res://scenes/objects/treasure_chest/treasure_chest.tscn" id="7_ln5sr"]
+[ext_resource type="Resource" uid="uid://cnd7v6qeaceno" path="res://items/w_katana.tres" id="8_cckgl"]
+[ext_resource type="Resource" uid="uid://cfwjfj2sd8fap" path="res://items/ability_arrow.tres" id="9_0ggq0"]
+[ext_resource type="PackedScene" uid="uid://nbv4q5hg05s6" path="res://scenes/npcs/npc.tscn" id="9_dngvl"]
+[ext_resource type="Resource" uid="uid://dhpgw6lpmnmcj" path="res://items/ability_bomb.tres" id="10_ghl2x"]
+[ext_resource type="Resource" uid="uid://dyxu1ojjur15" path="res://scenes/npcs/00_npcs/bro_01.tres" id="10_x7ob2"]
+[ext_resource type="Resource" uid="uid://deopptq78xbhy" path="res://scenes/npcs/00_npcs/bro_02.tres" id="12_1r54w"]
+[ext_resource type="PackedScene" uid="uid://d4bmdr1mrv3jk" path="res://scenes/component/dialog/dialog_interact.tscn" id="12_y3ilu"]
+[ext_resource type="AudioStream" uid="uid://br4xkl2q6vtmr" path="res://assets/audio/example_music_03.ogg" id="13_7p7f5"]
+[ext_resource type="Script" uid="uid://cqdnfbqkrusmx" path="res://scenes/component/dialog/dialog_text.gd" id="13_hfiwb"]
+[ext_resource type="Script" uid="uid://cwn4av1xhqudo" path="res://scenes/component/dialog/custscene_action_music.gd" id="13_i1jip"]
+[ext_resource type="Script" uid="uid://bipmoaxtp6vk0" path="res://scenes/component/dialog/dialog_cutscene.gd" id="13_lq2xw"]
+[ext_resource type="Script" uid="uid://bgum50setduu2" path="res://scenes/component/dialog/custscene_action_animation.gd" id="14_y3ilu"]
+[ext_resource type="Script" uid="uid://dfa2584weynvy" path="res://scenes/component/dialog/custscene_action_player.gd" id="16_6b0mc"]
+[ext_resource type="Script" uid="uid://dvy2p6u58pwax" path="res://scenes/component/dialog/custscene_action_camera.gd" id="17_hfiwb"]
+[ext_resource type="Script" uid="uid://bghoh7vlfnm1g" path="res://scenes/component/dialog/custscene_action_move.gd" id="17_y3ilu"]
+[ext_resource type="Resource" uid="uid://b8eu7po5wx45m" path="res://items/gem.tres" id="23_ghl2x"]
+[ext_resource type="Resource" uid="uid://06j5q71y7cec" path="res://items/arrow.tres" id="24_cd2bf"]
+[ext_resource type="Resource" uid="uid://bw0y7kbswt816" path="res://items/bomb.tres" id="25_sihp0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1r54w"]
+size = Vector2(384, 36)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aju3m"]
+radius = 8.0
+height = 28.0
+
+[sub_resource type="Animation" id="Animation_5smvm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_aju3m"]
+resource_name = "default"
+length = 0.4
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lxe1c"]
+_data = {
+&"RESET": SubResource("Animation_5smvm"),
+&"default": SubResource("Animation_aju3m")
+}
+
+[sub_resource type="Animation" id="Animation_lq2xw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DirectionalLight2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_hfiwb"]
+resource_name = "fade_to_black"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DirectionalLight2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.3]
+}
+
+[sub_resource type="Animation" id="Animation_y3ilu"]
+resource_name = "to_white"
+step = 0.1
+capture_included = true
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DirectionalLight2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"update": 2,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5ra2m"]
+_data = {
+&"RESET": SubResource("Animation_lq2xw"),
+&"fade_to_black": SubResource("Animation_hfiwb"),
+&"to_white": SubResource("Animation_y3ilu")
+}
+
+[node name="Section_02" type="Node2D"]
+z_as_relative = false
+y_sort_enabled = true
+script = ExtResource("1_cckgl")
+BGM = ExtResource("2_unesh")
+
+[node name="Quest_Activated_Switch" parent="." instance=ExtResource("3_7p7f5")]
+remove_when_activated = true
+free_when_remove = true
+react_global_signal = true
+linked_quest = ExtResource("4_3hovy")
+settings_summary = "更新任务：
+寻找小老弟的魔法笛
+[正在检查玩家是否有任务]"
+
+[node name="Area_Trigger" parent="Quest_Activated_Switch" instance=ExtResource("3_3hovy")]
+position = Vector2(448, 296)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Quest_Activated_Switch/Area_Trigger"]
+shape = SubResource("RectangleShape2D_1r54w")
+
+[node name="Dialog_Interact" parent="Quest_Activated_Switch/Area_Trigger" instance=ExtResource("12_y3ilu")]
+process_mode = 3
+monitoring = false
+
+[node name="To_Black" type="Node" parent="Quest_Activated_Switch/Area_Trigger/Dialog_Interact"]
+script = ExtResource("13_lq2xw")
+npc_info = ExtResource("10_x7ob2")
+metadata/_custom_type_script = "uid://bipmoaxtp6vk0"
+
+[node name="Custscene_Action_Music" type="Node2D" parent="Quest_Activated_Switch/Area_Trigger/Dialog_Interact/To_Black"]
+script = ExtResource("13_i1jip")
+track = ExtResource("13_7p7f5")
+metadata/_custom_type_script = "uid://cwn4av1xhqudo"
+
+[node name="Custscene_Action_Animation" type="Node2D" parent="Quest_Activated_Switch/Area_Trigger/Dialog_Interact/To_Black" node_paths=PackedStringArray("anim_player")]
+script = ExtResource("14_y3ilu")
+anim_player = NodePath("../../../../../AnimationPlayer")
+anim_name = "fade_to_black"
+metadata/_custom_type_script = "uid://bgum50setduu2"
+
+[node name="Camera_Move" type="Node" parent="Quest_Activated_Switch/Area_Trigger/Dialog_Interact"]
+script = ExtResource("13_lq2xw")
+npc_info = ExtResource("10_x7ob2")
+metadata/_custom_type_script = "uid://bipmoaxtp6vk0"
+
+[node name="Custscene_Action_Camera" type="Node2D" parent="Quest_Activated_Switch/Area_Trigger/Dialog_Interact/Camera_Move"]
+position = Vector2(451, 115)
+script = ExtResource("17_hfiwb")
+move_duration = 1.0
+metadata/_custom_type_script = "uid://dvy2p6u58pwax"
+
+[node name="Parrallel_Move" type="Node" parent="Quest_Activated_Switch/Area_Trigger/Dialog_Interact"]
+script = ExtResource("13_lq2xw")
+playback_mode = 0
+npc_info = ExtResource("10_x7ob2")
+metadata/_custom_type_script = "uid://bipmoaxtp6vk0"
+
+[node name="Custscene_Action_Camera" type="Node2D" parent="Quest_Activated_Switch/Area_Trigger/Dialog_Interact/Parrallel_Move"]
+position = Vector2(451, 264)
+script = ExtResource("17_hfiwb")
+move_duration = 2.0
+metadata/_custom_type_script = "uid://dvy2p6u58pwax"
+
+[node name="Custscene_Action_Move2" type="Node2D" parent="Quest_Activated_Switch/Area_Trigger/Dialog_Interact/Parrallel_Move" node_paths=PackedStringArray("object_to_move")]
+position = Vector2(532, 263)
+script = ExtResource("17_y3ilu")
+move_method = 1
+object_to_move = NodePath("../../../../../Young_Bro")
+move_speed = 200.0
+metadata/_custom_type_script = "uid://bghoh7vlfnm1g"
+
+[node name="Parrallel_Move2" type="Node" parent="Quest_Activated_Switch/Area_Trigger/Dialog_Interact"]
+script = ExtResource("13_lq2xw")
+npc_info = ExtResource("10_x7ob2")
+metadata/_custom_type_script = "uid://bipmoaxtp6vk0"
+
+[node name="Custscene_Action_Move4" type="Node2D" parent="Quest_Activated_Switch/Area_Trigger/Dialog_Interact/Parrallel_Move2" node_paths=PackedStringArray("object_to_move")]
+position = Vector2(451, 282)
+script = ExtResource("17_y3ilu")
+move_method = 1
+object_to_move = NodePath("../../../../../Young_Bro")
+move_duration = 2.0
+move_speed = 150.0
+metadata/_custom_type_script = "uid://bghoh7vlfnm1g"
+
+[node name="Custscene_Action_Player" type="Node2D" parent="Quest_Activated_Switch/Area_Trigger/Dialog_Interact/Parrallel_Move2"]
+position = Vector2(452, 185)
+script = ExtResource("16_6b0mc")
+reset_camera_to_player = false
+move_method = 1
+move_speed = 150.0
+metadata/_custom_type_script = "uid://dfa2584weynvy"
+
+[node name="Move2" type="Node" parent="Quest_Activated_Switch/Area_Trigger/Dialog_Interact"]
+script = ExtResource("13_lq2xw")
+npc_info = ExtResource("10_x7ob2")
+metadata/_custom_type_script = "uid://bipmoaxtp6vk0"
+
+[node name="Custscene_Action_Move4" type="Node2D" parent="Quest_Activated_Switch/Area_Trigger/Dialog_Interact/Move2" node_paths=PackedStringArray("object_to_move")]
+position = Vector2(451, 252)
+script = ExtResource("17_y3ilu")
+move_method = 1
+object_to_move = NodePath("../../../../../Young_Bro")
+move_duration = 2.0
+move_speed = 150.0
+metadata/_custom_type_script = "uid://bghoh7vlfnm1g"
+
+[node name="Dalog_Text" type="Node" parent="Quest_Activated_Switch/Area_Trigger/Dialog_Interact"]
+script = ExtResource("13_hfiwb")
+text = "等等！这边可都是我的[color=red]宝贝[/color]！
+你要是想要的话，先过来帮我一个忙再说！"
+npc_info = ExtResource("12_1r54w")
+metadata/_custom_type_script = "uid://cqdnfbqkrusmx"
+
+[node name="Move3" type="Node" parent="Quest_Activated_Switch/Area_Trigger/Dialog_Interact"]
+script = ExtResource("13_lq2xw")
+npc_info = ExtResource("10_x7ob2")
+metadata/_custom_type_script = "uid://bipmoaxtp6vk0"
+
+[node name="Custscene_Action_Move4" type="Node2D" parent="Quest_Activated_Switch/Area_Trigger/Dialog_Interact/Move3" node_paths=PackedStringArray("object_to_move")]
+position = Vector2(532, 255)
+script = ExtResource("17_y3ilu")
+move_method = 1
+object_to_move = NodePath("../../../../../Young_Bro")
+move_duration = 2.0
+move_speed = 150.0
+metadata/_custom_type_script = "uid://bghoh7vlfnm1g"
+
+[node name="To_White" type="Node" parent="Quest_Activated_Switch/Area_Trigger/Dialog_Interact"]
+script = ExtResource("13_lq2xw")
+playback_mode = 0
+npc_info = ExtResource("10_x7ob2")
+metadata/_custom_type_script = "uid://bipmoaxtp6vk0"
+
+[node name="Custscene_Action_Move5" type="Node2D" parent="Quest_Activated_Switch/Area_Trigger/Dialog_Interact/To_White" node_paths=PackedStringArray("object_to_move")]
+position = Vector2(537, -42)
+script = ExtResource("17_y3ilu")
+move_method = 1
+object_to_move = NodePath("../../../../../Young_Bro")
+move_duration = 2.0
+move_speed = 150.0
+metadata/_custom_type_script = "uid://bghoh7vlfnm1g"
+
+[node name="Custscene_Action_Animation" type="Node2D" parent="Quest_Activated_Switch/Area_Trigger/Dialog_Interact/To_White" node_paths=PackedStringArray("anim_player")]
+script = ExtResource("14_y3ilu")
+anim_player = NodePath("../../../../../AnimationPlayer")
+anim_name = "to_white"
+metadata/_custom_type_script = "uid://bgum50setduu2"
+
+[node name="Quest_Activated_Switch2" parent="." instance=ExtResource("3_7p7f5")]
+check_mode = 3
+remove_when_activated = true
+free_when_remove = true
+react_global_signal = true
+linked_quest = ExtResource("4_3hovy")
+quest_complete = true
+settings_summary = "更新任务：
+寻找小老弟的魔法笛
+[正在检查任务是否完成]"
+
+[node name="Area_Trigger2" parent="Quest_Activated_Switch2" instance=ExtResource("3_3hovy")]
+position = Vector2(448, 480)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Quest_Activated_Switch2/Area_Trigger2"]
+shape = SubResource("RectangleShape2D_1r54w")
+
+[node name="Dialog_Interact" parent="Quest_Activated_Switch2/Area_Trigger2" instance=ExtResource("12_y3ilu")]
+process_mode = 3
+monitoring = false
+
+[node name="To_Black" type="Node" parent="Quest_Activated_Switch2/Area_Trigger2/Dialog_Interact"]
+script = ExtResource("13_lq2xw")
+npc_info = ExtResource("10_x7ob2")
+metadata/_custom_type_script = "uid://bipmoaxtp6vk0"
+
+[node name="Custscene_Action_Music" type="Node2D" parent="Quest_Activated_Switch2/Area_Trigger2/Dialog_Interact/To_Black"]
+script = ExtResource("13_i1jip")
+track = ExtResource("13_7p7f5")
+metadata/_custom_type_script = "uid://cwn4av1xhqudo"
+
+[node name="Custscene_Action_Animation" type="Node2D" parent="Quest_Activated_Switch2/Area_Trigger2/Dialog_Interact/To_Black" node_paths=PackedStringArray("anim_player")]
+script = ExtResource("14_y3ilu")
+anim_player = NodePath("../../../../../AnimationPlayer")
+anim_name = "fade_to_black"
+metadata/_custom_type_script = "uid://bgum50setduu2"
+
+[node name="Camera_Move" type="Node" parent="Quest_Activated_Switch2/Area_Trigger2/Dialog_Interact"]
+script = ExtResource("13_lq2xw")
+npc_info = ExtResource("10_x7ob2")
+metadata/_custom_type_script = "uid://bipmoaxtp6vk0"
+
+[node name="Custscene_Action_Camera" type="Node2D" parent="Quest_Activated_Switch2/Area_Trigger2/Dialog_Interact/Camera_Move"]
+position = Vector2(450, 326)
+script = ExtResource("17_hfiwb")
+move_duration = 1.0
+metadata/_custom_type_script = "uid://dvy2p6u58pwax"
+
+[node name="Custscene_Action_Move" type="Node2D" parent="Quest_Activated_Switch2/Area_Trigger2/Dialog_Interact/Camera_Move" node_paths=PackedStringArray("object_to_move")]
+position = Vector2(530, 212)
+script = ExtResource("17_y3ilu")
+object_to_move = NodePath("../../../../../Young_Bro")
+move_duration = 0.2
+metadata/_custom_type_script = "uid://bghoh7vlfnm1g"
+
+[node name="Parrallel_Move" type="Node" parent="Quest_Activated_Switch2/Area_Trigger2/Dialog_Interact"]
+script = ExtResource("13_lq2xw")
+playback_mode = 0
+npc_info = ExtResource("10_x7ob2")
+metadata/_custom_type_script = "uid://bipmoaxtp6vk0"
+
+[node name="Custscene_Action_Camera" type="Node2D" parent="Quest_Activated_Switch2/Area_Trigger2/Dialog_Interact/Parrallel_Move"]
+position = Vector2(449, 473)
+script = ExtResource("17_hfiwb")
+move_duration = 1.5
+metadata/_custom_type_script = "uid://dvy2p6u58pwax"
+
+[node name="Custscene_Action_Move2" type="Node2D" parent="Quest_Activated_Switch2/Area_Trigger2/Dialog_Interact/Parrallel_Move" node_paths=PackedStringArray("object_to_move")]
+position = Vector2(521, 474)
+script = ExtResource("17_y3ilu")
+move_method = 1
+object_to_move = NodePath("../../../../../Young_Bro")
+move_speed = 200.0
+metadata/_custom_type_script = "uid://bghoh7vlfnm1g"
+
+[node name="Parrallel_Move2" type="Node" parent="Quest_Activated_Switch2/Area_Trigger2/Dialog_Interact"]
+script = ExtResource("13_lq2xw")
+npc_info = ExtResource("10_x7ob2")
+metadata/_custom_type_script = "uid://bipmoaxtp6vk0"
+
+[node name="Custscene_Action_Move4" type="Node2D" parent="Quest_Activated_Switch2/Area_Trigger2/Dialog_Interact/Parrallel_Move2" node_paths=PackedStringArray("object_to_move")]
+position = Vector2(450, 487)
+script = ExtResource("17_y3ilu")
+move_method = 1
+object_to_move = NodePath("../../../../../Young_Bro")
+move_duration = 2.0
+move_speed = 150.0
+metadata/_custom_type_script = "uid://bghoh7vlfnm1g"
+
+[node name="Custscene_Action_Player" type="Node2D" parent="Quest_Activated_Switch2/Area_Trigger2/Dialog_Interact/Parrallel_Move2"]
+position = Vector2(448, 423)
+script = ExtResource("16_6b0mc")
+reset_camera_to_player = false
+move_method = 1
+move_speed = 150.0
+metadata/_custom_type_script = "uid://dfa2584weynvy"
+
+[node name="Move2" type="Node" parent="Quest_Activated_Switch2/Area_Trigger2/Dialog_Interact"]
+script = ExtResource("13_lq2xw")
+npc_info = ExtResource("10_x7ob2")
+metadata/_custom_type_script = "uid://bipmoaxtp6vk0"
+
+[node name="Custscene_Action_Move4" type="Node2D" parent="Quest_Activated_Switch2/Area_Trigger2/Dialog_Interact/Move2" node_paths=PackedStringArray("object_to_move")]
+position = Vector2(449, 462)
+script = ExtResource("17_y3ilu")
+move_method = 1
+object_to_move = NodePath("../../../../../Young_Bro")
+move_duration = 2.0
+move_speed = 150.0
+metadata/_custom_type_script = "uid://bghoh7vlfnm1g"
+
+[node name="Dalog_Text" type="Node" parent="Quest_Activated_Switch2/Area_Trigger2/Dialog_Interact"]
+script = ExtResource("13_hfiwb")
+text = "等等！这边的[color=red]宝贝[/color]现在还不能给你！
+请先完成我的委托吧！"
+npc_info = ExtResource("12_1r54w")
+metadata/_custom_type_script = "uid://cqdnfbqkrusmx"
+
+[node name="Move3" type="Node" parent="Quest_Activated_Switch2/Area_Trigger2/Dialog_Interact"]
+script = ExtResource("13_lq2xw")
+npc_info = ExtResource("10_x7ob2")
+metadata/_custom_type_script = "uid://bipmoaxtp6vk0"
+
+[node name="Custscene_Action_Move4" type="Node2D" parent="Quest_Activated_Switch2/Area_Trigger2/Dialog_Interact/Move3" node_paths=PackedStringArray("object_to_move")]
+position = Vector2(521, 463)
+script = ExtResource("17_y3ilu")
+move_method = 1
+object_to_move = NodePath("../../../../../Young_Bro")
+move_duration = 2.0
+move_speed = 150.0
+metadata/_custom_type_script = "uid://bghoh7vlfnm1g"
+
+[node name="To_White" type="Node" parent="Quest_Activated_Switch2/Area_Trigger2/Dialog_Interact"]
+script = ExtResource("13_lq2xw")
+playback_mode = 0
+npc_info = ExtResource("10_x7ob2")
+metadata/_custom_type_script = "uid://bipmoaxtp6vk0"
+
+[node name="Custscene_Action_Move5" type="Node2D" parent="Quest_Activated_Switch2/Area_Trigger2/Dialog_Interact/To_White" node_paths=PackedStringArray("object_to_move")]
+position = Vector2(532, 228)
+script = ExtResource("17_y3ilu")
+move_method = 1
+object_to_move = NodePath("../../../../../Young_Bro")
+move_speed = 160.0
+metadata/_custom_type_script = "uid://bghoh7vlfnm1g"
+
+[node name="Custscene_Action_Animation" type="Node2D" parent="Quest_Activated_Switch2/Area_Trigger2/Dialog_Interact/To_White" node_paths=PackedStringArray("anim_player")]
+script = ExtResource("14_y3ilu")
+anim_player = NodePath("../../../../../AnimationPlayer")
+anim_name = "to_white"
+metadata/_custom_type_script = "uid://bgum50setduu2"
+
+[node name="Move4" type="Node" parent="Quest_Activated_Switch2/Area_Trigger2/Dialog_Interact"]
+script = ExtResource("13_lq2xw")
+npc_info = ExtResource("10_x7ob2")
+metadata/_custom_type_script = "uid://bipmoaxtp6vk0"
+
+[node name="Custscene_Action_Move" type="Node2D" parent="Quest_Activated_Switch2/Area_Trigger2/Dialog_Interact/Move4" node_paths=PackedStringArray("object_to_move")]
+position = Vector2(536, -42)
+script = ExtResource("17_y3ilu")
+object_to_move = NodePath("../../../../../Young_Bro")
+move_duration = 0.1
+move_speed = 150.0
+metadata/_custom_type_script = "uid://bghoh7vlfnm1g"
+
+[node name="Young_Bro" parent="." instance=ExtResource("9_dngvl")]
+position = Vector2(536, -36)
+npc_resource = ExtResource("12_1r54w")
+
+[node name="Grass_01" parent="." instance=ExtResource("3_vcvj6")]
+z_index = -5
+tile_map_data = PackedByteArray("AAD+/wAAAAACAAEAAAD+/wEAAAADAAQAAAD+/wIAAAALAAcAAAD//wAAAAAAAAAAAAD//wEAAAAEAAQAAAD//wIAAAAMAAcAAAAAAAAAAAAAAAAAAAAAAAEAAAACAAQAAAAAAAIAAAAMAAcAAAABAAAAAAACAAMAAAABAAEAAAADAAQAAAABAAIAAAALAAcAAAD+/wMAAAAMAAQAAAD+/wQAAAAMAAUAAAD+/wUAAAAAAAAAAAD//wMAAAANAAQAAAD//wQAAAAMAAUAAAD//wUAAAAAAAAAAAAAAAMAAAALAAQAAAAAAAQAAAAMAAUAAAAAAAUAAAAAAAAAAAABAAMAAAAMAAQAAAABAAQAAAAMAAUAAAABAAUAAAABAAMAAAD+/wYAAAABAAEAAAD+/wcAAAAAAAAAAAD+/wgAAAAAAAAAAAD//wYAAAABAAEAAAD//wcAAAAAAAAAAAD//wgAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAgAAAABAAMAAAABAAYAAAABAAMAAAABAAcAAAABAAMAAAABAAgAAAABAAMAAAACAAAAAAADAAMAAAACAAEAAAAEAAQAAAACAAIAAAAMAAcAAAADAAAAAAAAAAAAAAADAAEAAAACAAQAAAADAAIAAAANAAcAAAAEAAAAAAAOAAUAAAAEAAEAAAAOAAYAAAAEAAIAAAAOAAcAAAAFAAAAAAAAAAIAAAAFAAEAAAAAAAMAAAAFAAIAAAAAAAIAAAACAAMAAAANAAQAAAACAAQAAAAMAAUAAAACAAUAAAABAAEAAAADAAMAAAALAAQAAAADAAQAAAAMAAUAAAADAAUAAAAAAAAAAAAEAAMAAAAMAAQAAAAEAAQAAAAMAAUAAAAEAAUAAAAAAAAAAAAFAAMAAAANAAQAAAAFAAQAAAAMAAUAAAAFAAUAAAAAAAAAAAACAAYAAAAAAAAAAAACAAcAAAAAAAAAAAACAAgAAAAAAAAAAAADAAYAAAAAAAAAAAADAAcAAAAAAAAAAAADAAgAAAACAAEAAAAEAAYAAAAAAAAAAAAEAAcAAAAAAAAAAAAEAAgAAAAAAAAAAAAFAAYAAAAAAAAAAAAFAAcAAAAAAAAAAAAFAAgAAAAMAAUAAAAGAAAAAAABAAIAAAAGAAEAAAABAAMAAAAGAAIAAAABAAIAAAAHAAAAAAACAAIAAAAHAAEAAAACAAMAAAAHAAIAAAACAAIAAAAIAAAAAAADAAIAAAAIAAEAAAADAAMAAAAIAAIAAAADAAIAAAAJAAAAAAAAAAIAAAAJAAEAAAAAAAMAAAAJAAIAAAAAAAIAAAAGAAMAAAALAAQAAAAGAAQAAAAMAAUAAAAGAAUAAAABAAEAAAAHAAMAAAAOAAQAAAAHAAQAAAAOAAUAAAAHAAUAAAAOAAUAAAAIAAMAAAAAAAIAAAAJAAMAAAABAAIAAAAGAAYAAAAAAAAAAAAGAAcAAAAAAAAAAAAGAAgAAAAAAAAAAAAHAAYAAAAOAAYAAAAHAAcAAAAOAAUAAAAHAAgAAAAOAAYAAAAKAAAAAAABAAIAAAAKAAEAAAABAAMAAAAKAAIAAAABAAIAAAALAAAAAAACAAIAAAALAAEAAAACAAMAAAALAAIAAAACAAIAAAAMAAAAAAADAAIAAAAMAAEAAAADAAMAAAAMAAIAAAADAAIAAAANAAAAAAAAAAAAAAAKAAMAAAACAAIAAAAKAAQAAAACAAMAAAAKAAUAAAACAAIAAAALAAMAAAACAAMAAAALAAQAAAAAAAAAAAALAAUAAAAAAAAAAAAMAAMAAAADAAMAAAAMAAQAAAAAAAAAAAAMAAUAAAAAAAAAAAANAAMAAAAAAAAAAAANAAQAAAAAAAAAAAANAAUAAAAAAAAAAAAKAAYAAAACAAMAAAAKAAcAAAACAAIAAAAKAAgAAAACAAMAAAALAAYAAAAAAAAAAAALAAcAAAAAAAAAAAALAAgAAAABAAEAAAAMAAYAAAAAAAAAAAAMAAcAAAABAAEAAAAMAAgAAAAAAAAAAAANAAYAAAAAAAAAAAANAAcAAAAAAAAAAAANAAgAAAAAAAAAAAAOAAAAAAAAAAAAAAAPAAAAAAACAAIAAAAQAAAAAAAAAAIAAAAQAAEAAAAAAAMAAAAQAAIAAAAAAAIAAAARAAAAAAABAAIAAAARAAEAAAABAAMAAAARAAIAAAAAAAIAAAAOAAMAAAAAAAAAAAAOAAQAAAAAAAAAAAAOAAUAAAAAAAAAAAAPAAMAAAACAAMAAAAPAAQAAAABAAEAAAAPAAUAAAAAAAAAAAAQAAMAAAAAAAMAAAAQAAQAAAAAAAAAAAAQAAUAAAAAAAAAAAARAAMAAAAAAAMAAAARAAQAAAAAAAIAAAARAAUAAAAAAAMAAAAOAAYAAAAAAAAAAAAOAAcAAAAAAAAAAAAOAAgAAAAAAAAAAAAPAAYAAAAAAAAAAAAPAAcAAAABAAEAAAAPAAgAAAAAAAAAAAAQAAYAAAAAAAAAAAAQAAcAAAAAAAAAAAAQAAgAAAAAAAAAAAARAAYAAAAAAAIAAAARAAcAAAAAAAMAAAARAAgAAAAAAAIAAAASAAAAAAACAAIAAAASAAEAAAACAAMAAAASAAIAAAABAAIAAAATAAAAAAADAAIAAAATAAEAAAADAAMAAAATAAIAAAACAAIAAAAUAAAAAAAAAAIAAAAUAAEAAAAAAAMAAAAUAAIAAAAAAAIAAAAVAAAAAAABAAIAAAAVAAEAAAABAAMAAAAVAAIAAAABAAIAAAAUAAMAAAAKAAQAAAAUAAQAAAAKAAUAAAAUAAUAAAAKAAUAAAAVAAMAAAALAAQAAAAVAAQAAAABAAIAAAAVAAUAAAABAAEAAAAUAAYAAAAKAAYAAAAUAAcAAAAKAAUAAAAUAAgAAAAKAAYAAAAVAAYAAAAAAAAAAAAVAAcAAAAAAAAAAAAVAAgAAAAAAAAAAAAWAAAAAAACAAIAAAAWAAEAAAACAAMAAAAWAAIAAAACAAIAAAAXAAAAAAADAAIAAAAXAAEAAAADAAMAAAAXAAIAAAADAAIAAAAYAAAAAAAKAAUAAAAYAAEAAAAKAAYAAAAYAAIAAAAKAAcAAAAZAAAAAAAAAAAAAAAZAAEAAAANAAYAAAAZAAIAAAANAAcAAAAWAAMAAAALAAQAAAAWAAQAAAABAAIAAAAWAAUAAAAAAAAAAAAXAAMAAAAMAAQAAAAXAAQAAAABAAIAAAAXAAUAAAAAAAAAAAAYAAMAAAANAAQAAAAYAAQAAAABAAIAAAAYAAUAAAAAAAAAAAAZAAMAAAALAAQAAAAZAAQAAAABAAIAAAAZAAUAAAAAAAAAAAAWAAYAAAAAAAAAAAAWAAcAAAAAAAAAAAAWAAgAAAAAAAIAAAAXAAYAAAAAAAAAAAAXAAcAAAABAAEAAAAXAAgAAAABAAIAAAAYAAYAAAACAAEAAAAYAAcAAAABAAEAAAAYAAgAAAACAAIAAAAZAAYAAAAAAAAAAAAZAAcAAAAAAAAAAAAZAAgAAAADAAIAAAAaAAAAAAAMAAUAAAAaAAEAAAALAAYAAAAaAAIAAAALAAcAAAAbAAAAAAAMAAUAAAAbAAEAAAAMAAYAAAAbAAIAAAAMAAcAAAAcAAAAAAAMAAUAAAAcAAEAAAALAAYAAAAcAAIAAAALAAcAAAAdAAAAAAAMAAUAAAAdAAEAAAAMAAYAAAAdAAIAAAAMAAcAAAAaAAMAAAAMAAQAAAAaAAQAAAABAAIAAAAaAAUAAAAAAAMAAAAbAAMAAAANAAQAAAAbAAQAAAABAAIAAAAbAAUAAAABAAMAAAAcAAMAAAALAAQAAAAcAAQAAAABAAIAAAAcAAUAAAACAAMAAAAdAAMAAAAMAAQAAAAdAAQAAAABAAIAAAAdAAUAAAADAAMAAAAaAAYAAAAAAAIAAAAaAAcAAAAAAAMAAAAaAAgAAAAAAAIAAAAbAAYAAAABAAIAAAAbAAcAAAABAAMAAAAbAAgAAAABAAIAAAAcAAYAAAACAAIAAAAcAAcAAAACAAMAAAAcAAgAAAACAAIAAAAdAAYAAAADAAIAAAAdAAcAAAADAAMAAAAdAAgAAAADAAIAAAAeAAAAAAAMAAUAAAAeAAEAAAANAAYAAAAeAAIAAAANAAcAAAD9/wAAAAAAAAAAAAD9/wEAAAACAAQAAAD9/wIAAAAMAAcAAAD9/wMAAAALAAQAAAD9/wQAAAAMAAUAAAD9/wUAAAAAAAAAAAD9/wYAAAAAAAAAAAD9/wcAAAACAAEAAAD9/wgAAAAAAAAAAAANAAEAAAABAAIAAAAOAAEAAAACAAIAAAANAAIAAAABAAIAAAAOAAIAAAACAAIAAAAPAAEAAAACAAEAAAAPAAIAAAACAAIAAAAeAAMAAAANAAQAAAAeAAQAAAABAAIAAAAeAAUAAAAAAAMAAAAeAAYAAAAAAAIAAAAeAAcAAAAAAAMAAAAeAAgAAAAAAAIAAAD9/xIAAAACAAQAAAD9/xMAAAACAAUAAAD9/xQAAAACAAYAAAD9/xUAAAAAAAIAAAD+/xIAAAADAAQAAAD+/xMAAAADAAUAAAD+/xQAAAADAAYAAAD+/xUAAAABAAIAAAD//xIAAAAEAAQAAAD//xMAAAAEAAUAAAD//xQAAAAEAAYAAAD//xUAAAABAAIAAAAAABIAAAADAAQAAAAAABMAAAADAAUAAAAAABQAAAADAAYAAAAAABUAAAACAAIAAAABABIAAAAEAAQAAAABABMAAAAEAAUAAAABABQAAAAEAAYAAAABABUAAAADAAIAAAACABIAAAAEAAQAAAACABMAAAAEAAUAAAACABQAAAAEAAYAAAACABUAAAAAAAIAAAADABIAAAACAAQAAAADABMAAAACAAUAAAADABQAAAACAAYAAAADABUAAAABAAIAAAAEABIAAAADAAQAAAAEABMAAAADAAUAAAAEABQAAAADAAYAAAAEABUAAAACAAIAAAAFABIAAAAEAAQAAAAFABMAAAAEAAUAAAAFABQAAAAEAAYAAAAFABUAAAADAAIAAAAGABIAAAACAAQAAAAGABMAAAACAAUAAAAGABQAAAACAAYAAAAGABUAAAAAAAIAAAAHABIAAAADAAQAAAAHABMAAAADAAUAAAAHABQAAAADAAYAAAAHABUAAAABAAIAAAAIABIAAAAEAAQAAAAIABMAAAAEAAUAAAAIABQAAAAEAAYAAAAIABUAAAAAAAIAAAAJABIAAAACAAQAAAAJABMAAAACAAUAAAAJABQAAAACAAYAAAAJABUAAAABAAIAAAAKABIAAAADAAQAAAAKABMAAAADAAUAAAAKABQAAAADAAYAAAAKABUAAAAAAAIAAAALABIAAAAEAAQAAAALABMAAAAEAAUAAAALABQAAAAEAAYAAAALABUAAAABAAIAAAAMABIAAAACAAQAAAAMABMAAAACAAUAAAAMABQAAAACAAYAAAAMABUAAAAAAAIAAAANABIAAAADAAQAAAANABMAAAADAAUAAAANABQAAAADAAYAAAANABUAAAABAAIAAAAOABIAAAADAAQAAAAOABMAAAADAAUAAAAOABQAAAADAAYAAAAOABUAAAAAAAIAAAAPABIAAAACAAQAAAAPABMAAAACAAUAAAAPABQAAAACAAYAAAAPABUAAAABAAIAAAAQABIAAAADAAQAAAAQABMAAAADAAUAAAAQABQAAAADAAYAAAAQABUAAAAAAAIAAAARABIAAAAEAAQAAAARABMAAAAEAAUAAAARABQAAAAEAAYAAAARABUAAAABAAIAAAASABIAAAACAAQAAAASABMAAAACAAUAAAASABQAAAACAAYAAAASABUAAAAAAAIAAAATABIAAAADAAQAAAATABMAAAADAAUAAAATABQAAAADAAYAAAATABUAAAABAAIAAAAUABIAAAACAAQAAAAUABMAAAACAAUAAAAUABQAAAACAAYAAAAUABUAAAACAAMAAAAVABIAAAADAAQAAAAVABMAAAADAAUAAAAVABQAAAADAAYAAAAVABUAAAADAAIAAAAWABIAAAAEAAQAAAAWABMAAAAEAAUAAAAWABQAAAAEAAYAAAAWABUAAAAAAAIAAAAXABIAAAAEAAQAAAAXABMAAAAEAAUAAAAXABQAAAAEAAYAAAAXABUAAAABAAIAAAAYABIAAAACAAQAAAAYABMAAAACAAUAAAAYABQAAAACAAYAAAAYABUAAAACAAIAAAAZABIAAAADAAQAAAAZABMAAAADAAUAAAAZABQAAAADAAYAAAAZABUAAAADAAIAAAAaABIAAAAEAAQAAAAaABMAAAAEAAUAAAAaABQAAAAEAAYAAAAaABUAAAAAAAIAAAAbABIAAAACAAQAAAAbABMAAAACAAUAAAAbABQAAAACAAYAAAAbABUAAAABAAIAAAAcABIAAAACAAQAAAAcABMAAAACAAUAAAAcABQAAAACAAYAAAAcABUAAAACAAIAAAAdABIAAAADAAQAAAAdABMAAAADAAUAAAAdABQAAAADAAYAAAAdABUAAAADAAIAAAAeABIAAAAEAAQAAAAeABMAAAAEAAUAAAAeABQAAAAEAAYAAAAeABUAAAAAAAIAAAD9/w8AAAAAAAIAAAD9/xAAAAALAAYAAAD9/xEAAAALAAcAAAD+/w8AAAABAAIAAAD+/xAAAAAMAAYAAAD+/xEAAAAMAAcAAAD//w8AAAABAAIAAAD//xAAAAANAAYAAAD//xEAAAANAAcAAAAAAA8AAAACAAIAAAAAABAAAAALAAYAAAAAABEAAAALAAcAAAABAA8AAAADAAIAAAABABAAAAAMAAYAAAABABEAAAAMAAcAAAACAA8AAAAAAAIAAAACABAAAAANAAYAAAACABEAAAANAAcAAAADAA8AAAABAAIAAAADABAAAAALAAYAAAADABEAAAALAAcAAAAEAA8AAAACAAIAAAAEABAAAAAMAAYAAAAEABEAAAAMAAcAAAAFAA8AAAADAAIAAAAFABAAAAANAAYAAAAFABEAAAANAAcAAAAGAA8AAAACAAIAAAAGABAAAAANAAYAAAAGABEAAAANAAcAAAAHAA8AAAAOAAUAAAAHABAAAAAOAAYAAAAHABEAAAAOAAcAAAAKAA8AAAACAAIAAAAKABAAAAACAAIAAAAKABEAAAACAAMAAAALAA8AAAAAAAMAAAALABAAAAACAAMAAAALABEAAAACAAMAAAAMAA8AAAABAAMAAAAMABAAAAACAAMAAAAMABEAAAACAAMAAAANAA8AAAACAAMAAAANABAAAAACAAMAAAANABEAAAACAAMAAAAOAA8AAAAAAAMAAAAOABAAAAACAAMAAAAOABEAAAACAAMAAAAPAA8AAAABAAMAAAAPABAAAAACAAMAAAAPABEAAAACAAMAAAAQAA8AAAACAAMAAAAQABAAAAACAAMAAAAQABEAAAACAAMAAAARAA8AAAAAAAMAAAARABAAAAAAAAIAAAARABEAAAAAAAMAAAAUAA8AAAAKAAUAAAAUABAAAAAKAAYAAAAUABEAAAAKAAcAAAAVAA8AAAABAAIAAAAVABAAAAALAAYAAAAVABEAAAALAAcAAAAWAA8AAAAAAAMAAAAWABAAAAALAAYAAAAWABEAAAALAAcAAAAXAA8AAAABAAMAAAAXABAAAAAMAAYAAAAXABEAAAAMAAcAAAAYAA8AAAACAAMAAAAYABAAAAANAAYAAAAYABEAAAANAAcAAAAZAA8AAAADAAMAAAAZABAAAAALAAYAAAAZABEAAAALAAcAAAAaAA8AAAAAAAMAAAAaABAAAAAMAAYAAAAaABEAAAAMAAcAAAAbAA8AAAABAAMAAAAbABAAAAANAAYAAAAbABEAAAANAAcAAAAcAA8AAAACAAMAAAAcABAAAAALAAYAAAAcABEAAAALAAcAAAAdAA8AAAADAAMAAAAdABAAAAAMAAYAAAAdABEAAAAMAAcAAAAeAA8AAAAAAAMAAAAeABAAAAANAAYAAAAeABEAAAANAAcAAAD9/wkAAAAAAAIAAAD9/woAAAAAAAMAAAD+/wkAAAABAAIAAAD+/woAAAABAAMAAAD//wkAAAACAAIAAAD//woAAAACAAMAAAAAAAkAAAADAAIAAAAAAAoAAAADAAMAAAABAAkAAAADAAIAAAABAAoAAAADAAMAAAACAAkAAAABAAIAAAACAAoAAAABAAMAAAADAAkAAAACAAIAAAADAAoAAAACAAMAAAAEAAkAAAADAAIAAAAEAAoAAAADAAMAAAABAAsAAAADAAIAAAABAAwAAAADAAMAAAACAAsAAAABAAIAAAACAAwAAAABAAMAAAADAAsAAAACAAIAAAADAAwAAAACAAMAAAAEAAsAAAADAAIAAAAEAAwAAAADAAMAAAABAA0AAAADAAIAAAABAA4AAAADAAMAAAACAA0AAAABAAIAAAACAA4AAAABAAMAAAADAA0AAAACAAIAAAADAA4AAAACAAMAAAAEAA0AAAADAAIAAAAEAA4AAAADAAMAAAAFAA0AAAAAAAIAAAAFAA4AAAAAAAMAAAAGAA0AAAADAAIAAAAGAA4AAAADAAMAAAAHAA0AAAAOAAUAAAAHAA4AAAAOAAYAAAAFAAsAAAAAAAIAAAAFAAwAAAAAAAMAAAAGAAsAAAADAAIAAAAGAAwAAAADAAMAAAAHAAsAAAAOAAUAAAAHAAwAAAAOAAYAAAAFAAkAAAAAAAIAAAAFAAoAAAAAAAMAAAAGAAkAAAADAAIAAAAGAAoAAAADAAMAAAAHAAkAAAAOAAUAAAAHAAoAAAAOAAYAAAD+/wsAAAABAAIAAAD+/wwAAAABAAMAAAD//wsAAAACAAIAAAD//wwAAAACAAMAAAAAAAsAAAADAAIAAAAAAAwAAAADAAMAAAD+/w0AAAABAAIAAAD+/w4AAAABAAMAAAD//w0AAAACAAIAAAD//w4AAAACAAMAAAAAAA0AAAADAAIAAAAAAA4AAAADAAMAAAD9/w0AAAAAAAIAAAD9/w4AAAAAAAMAAAD9/wsAAAAAAAIAAAD9/wwAAAAAAAMAAAAUAAkAAAAKAAUAAAAUAAoAAAAKAAYAAAAVAAkAAAAAAAIAAAAVAAoAAAAAAAMAAAAWAAkAAAAAAAMAAAAWAAoAAAAAAAIAAAAXAAkAAAABAAMAAAAXAAoAAAABAAIAAAAYAAkAAAACAAMAAAAYAAoAAAACAAIAAAAZAAkAAAADAAMAAAAZAAoAAAAAAAIAAAAaAAkAAAADAAIAAAAaAAoAAAABAAIAAAAbAAkAAAAAAAIAAAAbAAoAAAACAAIAAAAcAAkAAAABAAIAAAAcAAoAAAADAAIAAAAdAAkAAAACAAIAAAAdAAoAAAACAAMAAAAeAAkAAAADAAIAAAAeAAoAAAADAAMAAAAbAAsAAAACAAMAAAAbAAwAAAABAAIAAAAcAAsAAAADAAMAAAAcAAwAAAACAAIAAAAdAAsAAAACAAIAAAAdAAwAAAADAAIAAAAeAAsAAAADAAIAAAAeAAwAAAADAAMAAAAbAA0AAAABAAMAAAAbAA4AAAABAAIAAAAcAA0AAAACAAMAAAAcAA4AAAACAAIAAAAdAA0AAAADAAMAAAAdAA4AAAADAAIAAAAeAA0AAAADAAIAAAAeAA4AAAADAAMAAAAUAA0AAAAKAAUAAAAUAA4AAAAKAAYAAAAVAA0AAAAAAAIAAAAVAA4AAAAAAAMAAAAWAA0AAAAAAAMAAAAWAA4AAAAAAAIAAAAUAAsAAAAKAAUAAAAUAAwAAAAKAAYAAAAVAAsAAAAAAAIAAAAVAAwAAAAAAAMAAAAWAAsAAAAAAAMAAAAWAAwAAAAAAAIAAAAaAAwAAAAAAAIAAAAaAA0AAAAAAAMAAAAXAAwAAAABAAIAAAAXAA0AAAABAAMAAAAYAAwAAAACAAIAAAAYAA0AAAACAAMAAAAZAAwAAAADAAIAAAAZAA0AAAADAAMAAAAXAAsAAAABAAMAAAAYAAsAAAACAAMAAAAZAAsAAAAAAAMAAAAXAA4AAAABAAIAAAAYAA4AAAACAAIAAAAZAA4AAAADAAIAAAAaAA4AAAAAAAIAAAAaAAsAAAABAAMAAAAIAAQAAAAAAAMAAAAJAAQAAAABAAMAAAAIAAUAAAAAAAIAAAAIAAYAAAAAAAMAAAAJAAUAAAABAAIAAAAJAAYAAAABAAMAAAAIAAcAAAAAAAIAAAAIAAgAAAAAAAMAAAAJAAcAAAABAAIAAAAJAAgAAAABAAMAAAAIAAkAAAAAAAIAAAAIAAoAAAAAAAMAAAAJAAkAAAABAAIAAAAJAAoAAAABAAMAAAAKAAkAAAAAAAIAAAAKAAoAAAAAAAMAAAAIAAsAAAAAAAIAAAAIAAwAAAAAAAMAAAAJAAsAAAABAAIAAAAJAAwAAAABAAMAAAAKAAsAAAACAAIAAAAKAAwAAAACAAMAAAAIAA0AAAAAAAIAAAAIAA4AAAAAAAMAAAAJAA0AAAABAAIAAAAJAA4AAAABAAMAAAAKAA0AAAACAAIAAAAKAA4AAAACAAMAAAAIAA8AAAAAAAIAAAAIABAAAAAAAAIAAAAJAA8AAAABAAIAAAAJABAAAAABAAIAAAAIABEAAAAAAAMAAAAJABEAAAABAAMAAAALAA4AAAAAAAIAAAAMAA4AAAABAAIAAAANAA4AAAACAAIAAAALAAwAAAAAAAIAAAALAA0AAAAAAAMAAAAMAAwAAAABAAIAAAAMAA0AAAABAAMAAAANAAwAAAACAAIAAAANAA0AAAACAAMAAAALAAoAAAABAAMAAAALAAsAAAAAAAMAAAAMAAoAAAACAAMAAAAMAAsAAAABAAMAAAANAAoAAAAAAAMAAAANAAsAAAACAAMAAAAOAAoAAAABAAMAAAAOAAsAAAAAAAMAAAAPAAoAAAAAAAMAAAAPAAsAAAABAAMAAAAQAAoAAAABAAMAAAAQAAsAAAACAAMAAAAOAAwAAAAAAAIAAAAOAA0AAAAAAAMAAAAPAAwAAAABAAIAAAAPAA0AAAABAAMAAAAQAAwAAAACAAIAAAAQAA0AAAACAAMAAAAOAA4AAAAAAAIAAAAPAA4AAAABAAIAAAAQAA4AAAACAAIAAAASABAAAAABAAIAAAASABEAAAABAAMAAAATABAAAAACAAIAAAATABEAAAACAAMAAAARAA4AAAAAAAIAAAASAA4AAAABAAIAAAASAA8AAAABAAMAAAATAA4AAAACAAIAAAATAA8AAAACAAMAAAARAAwAAAAAAAIAAAARAA0AAAAAAAMAAAASAAwAAAABAAIAAAASAA0AAAABAAMAAAATAAwAAAACAAIAAAATAA0AAAACAAMAAAARAAoAAAACAAMAAAARAAsAAAAAAAMAAAASAAoAAAABAAIAAAASAAsAAAABAAMAAAATAAoAAAACAAIAAAATAAsAAAACAAMAAAARAAkAAAACAAIAAAASAAgAAAABAAIAAAASAAkAAAABAAMAAAATAAgAAAACAAIAAAATAAkAAAACAAMAAAASAAYAAAABAAIAAAASAAcAAAABAAMAAAATAAYAAAACAAIAAAATAAcAAAACAAMAAAASAAQAAAABAAIAAAASAAUAAAABAAMAAAATAAQAAAACAAIAAAATAAUAAAACAAMAAAASAAMAAAABAAMAAAATAAMAAAACAAMAAAALAAkAAAABAAIAAAAMAAkAAAACAAIAAAANAAkAAAAAAAIAAAAOAAkAAAABAAIAAAAPAAkAAAAAAAIAAAAQAAkAAAABAAIAAAA=")
+
+[node name="Player_Spawn" parent="." instance=ExtResource("4_ql3cq")]
+position = Vector2(309, 104)
+
+[node name="Level_Transform" parent="." instance=ExtResource("5_6k8sw")]
+position = Vector2(464, 32)
+level = "uid://ssr8yva2kv50"
+target_transform_area = "Level_Transform2"
+size = 19
+side = 2
+
+[node name="Torch" type="Node2D" parent="."]
+position = Vector2(263, 585)
+
+[node name="Sprite2D" type="Sprite2D" parent="Torch"]
+position = Vector2(0, -27)
+texture = ExtResource("6_pjxhq")
+hframes = 5
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Torch"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Torch/StaticBody2D"]
+position = Vector2(0, -4)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_aju3m")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Torch"]
+libraries = {
+&"": SubResource("AnimationLibrary_lxe1c")
+}
+autoplay = "default"
+
+[node name="Torch2" type="Node2D" parent="."]
+position = Vector2(634, 585)
+
+[node name="Sprite2D" type="Sprite2D" parent="Torch2"]
+position = Vector2(0, -27)
+texture = ExtResource("6_pjxhq")
+hframes = 5
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Torch2"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Torch2/StaticBody2D"]
+position = Vector2(0, -4)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_aju3m")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Torch2"]
+libraries = {
+&"": SubResource("AnimationLibrary_lxe1c")
+}
+autoplay = "default"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_5ra2m")
+}
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+color = Color(0.00030996968, 0.0003099697, 0.0003099696, 1)
+energy = 0.0
+blend_mode = 2
+
+[node name="Chests" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Treasure_Chest" parent="Chests" instance=ExtResource("7_ln5sr")]
+position = Vector2(451, 356)
+item_data = ExtResource("8_cckgl")
+
+[node name="Treasure_Chest3" parent="Chests" instance=ExtResource("7_ln5sr")]
+position = Vector2(339, 337)
+item_data = ExtResource("9_0ggq0")
+
+[node name="Treasure_Chest4" parent="Chests" instance=ExtResource("7_ln5sr")]
+position = Vector2(563, 334)
+item_data = ExtResource("10_ghl2x")
+
+[node name="Treasure_Chest5" parent="Chests" instance=ExtResource("7_ln5sr")]
+position = Vector2(339, 533)
+item_data = ExtResource("23_ghl2x")
+quantity = 100
+
+[node name="Treasure_Chest6" parent="Chests" instance=ExtResource("7_ln5sr")]
+position = Vector2(451, 533)
+item_data = ExtResource("23_ghl2x")
+quantity = 100
+
+[node name="Treasure_Chest7" parent="Chests" instance=ExtResource("7_ln5sr")]
+position = Vector2(563, 533)
+item_data = ExtResource("23_ghl2x")
+quantity = 100
+
+[node name="Treasure_Chest8" parent="Chests" instance=ExtResource("7_ln5sr")]
+position = Vector2(390, 580)
+item_data = ExtResource("24_cd2bf")
+quantity = 30
+
+[node name="Treasure_Chest9" parent="Chests" instance=ExtResource("7_ln5sr")]
+position = Vector2(512, 580)
+item_data = ExtResource("25_sihp0")
+quantity = 10

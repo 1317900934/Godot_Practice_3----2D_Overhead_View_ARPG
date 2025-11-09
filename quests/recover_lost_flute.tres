@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=7 format=3 uid="uid://biupqmos7xtfq"]
+
+[ext_resource type="Script" uid="uid://bg62aowdu1uj0" path="res://quests/scripts/quest_reward_item.gd" id="1_84jhj"]
+[ext_resource type="Script" uid="uid://bjoer0si2f6kr" path="res://quests/scripts/quest_resource.gd" id="2_7sluy"]
+[ext_resource type="Resource" uid="uid://j1rwvjw765jn" path="res://items/potion.tres" id="2_uaykj"]
+[ext_resource type="Resource" uid="uid://b8eu7po5wx45m" path="res://items/gem.tres" id="3_pyas3"]
+
+[sub_resource type="Resource" id="Resource_tua86"]
+script = ExtResource("1_84jhj")
+item = ExtResource("2_uaykj")
+quantity = 2
+metadata/_custom_type_script = "uid://bg62aowdu1uj0"
+
+[sub_resource type="Resource" id="Resource_4wy28"]
+script = ExtResource("1_84jhj")
+item = ExtResource("3_pyas3")
+quantity = 20
+metadata/_custom_type_script = "uid://bg62aowdu1uj0"
+
+[resource]
+script = ExtResource("2_7sluy")
+title = "寻找小老弟的魔法笛"
+description = "一个小老弟去地牢探险时弄丢了他的笛子，找到笛子并交还给他吧！"
+steps = Array[String](["进入洞穴入口", "找到笛子", "将笛子还给小老弟"])
+reward_xp = 80
+reward_items = Array[ExtResource("1_84jhj")]([SubResource("Resource_tua86"), SubResource("Resource_4wy28")])
+metadata/_custom_type_script = "uid://bjoer0si2f6kr"

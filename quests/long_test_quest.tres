@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=7 format=3 uid="uid://dbqtlkhyhbpqn"]
+
+[ext_resource type="Script" uid="uid://bg62aowdu1uj0" path="res://quests/scripts/quest_reward_item.gd" id="1_q8k3k"]
+[ext_resource type="Resource" uid="uid://3aim0svpipx1" path="res://items/apple.tres" id="2_aaqpu"]
+[ext_resource type="Script" uid="uid://bjoer0si2f6kr" path="res://quests/scripts/quest_resource.gd" id="2_st5yk"]
+[ext_resource type="Resource" uid="uid://b8eu7po5wx45m" path="res://items/gem.tres" id="3_aaqpu"]
+
+[sub_resource type="Resource" id="Resource_11fnf"]
+script = ExtResource("1_q8k3k")
+item = ExtResource("2_aaqpu")
+metadata/_custom_type_script = "uid://bg62aowdu1uj0"
+
+[sub_resource type="Resource" id="Resource_07i7p"]
+script = ExtResource("1_q8k3k")
+item = ExtResource("3_aaqpu")
+quantity = 30
+metadata/_custom_type_script = "uid://bg62aowdu1uj0"
+
+[resource]
+script = ExtResource("2_st5yk")
+title = "测试长期任务"
+description = "测试测试测试测试"
+steps = Array[String](["测试1", "测试2", "测试3", "测试4"])
+reward_xp = 50
+reward_items = Array[ExtResource("1_q8k3k")]([SubResource("Resource_11fnf"), SubResource("Resource_07i7p")])
+metadata/_custom_type_script = "uid://bjoer0si2f6kr"

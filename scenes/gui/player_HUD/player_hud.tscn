@@ -1,0 +1,781 @@
+[gd_scene load_steps=28 format=3 uid="uid://b313vfrfrknu0"]
+
+[ext_resource type="Texture2D" uid="uid://dte7gjd32twan" path="res://assets/graphic/gui-health.png" id="1_jvkp2"]
+[ext_resource type="Script" uid="uid://cgeteueovjgah" path="res://scenes/gui/player_HUD/player_hud.gd" id="1_scv2r"]
+[ext_resource type="PackedScene" uid="uid://c6qyrs2taa8p6" path="res://scenes/gui/player_HUD/heart_gui.tscn" id="2_mc46r"]
+[ext_resource type="FontFile" uid="uid://dhck3ihptxe7l" path="res://assets/方正像素字体.ttf" id="4_i6bkg"]
+[ext_resource type="Texture2D" uid="uid://jc77mrlwjiba" path="res://assets/abilities/ability-icons.png" id="4_q2544"]
+[ext_resource type="Theme" uid="uid://d3q5qiaab30l7" path="res://scenes/gui/dialog_system/dialog_choice_theme.tres" id="4_yif53"]
+[ext_resource type="Texture2D" uid="uid://dfkorawy3t4vo" path="res://assets/wizard_boss/boss-hp.png" id="6_nva7p"]
+[ext_resource type="Texture2D" uid="uid://pfo5de33vft" path="res://assets/quests/panel_notification.png" id="7_ejqv5"]
+[ext_resource type="Script" uid="uid://b0pnptn3drkrp" path="res://scenes/gui/player_HUD/notification.gd" id="7_mh2q4"]
+[ext_resource type="AudioStream" uid="uid://bfmexksp1mgky" path="res://assets/quests/notification.wav" id="8_e4q66"]
+
+[sub_resource type="Gradient" id="Gradient_mh2q4"]
+offsets = PackedFloat32Array(0.22613065, 0.61809045, 0.77386934, 0.93467337, 1)
+colors = PackedColorArray(0.863213, 0.8632129, 0.8632128, 1, 0.805713, 0.6746572, 0.33894375, 1, 0.87485385, 0.5587064, 0.346493, 1, 0.09073394, 0.16366407, 0.22554699, 0.22222215, 5.053729e-07, 0.18625963, 0.30796742, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_q2544"]
+gradient = SubResource("Gradient_mh2q4")
+width = 24
+height = 24
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rts5x"]
+atlas = ExtResource("4_q2544")
+region = Rect2(144, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q2544"]
+atlas = ExtResource("4_q2544")
+region = Rect2(144, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aidcj"]
+atlas = ExtResource("4_q2544")
+region = Rect2(128, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_se01d"]
+atlas = ExtResource("4_q2544")
+region = Rect2(128, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ejqv5"]
+atlas = ExtResource("6_nva7p")
+region = Rect2(9, 40, 14, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e4q66"]
+atlas = ExtResource("6_nva7p")
+region = Rect2(40, 40, 15, 15)
+
+[sub_resource type="FontVariation" id="FontVariation_nva7p"]
+base_font = ExtResource("4_i6bkg")
+spacing_glyph = 20
+
+[sub_resource type="Animation" id="Animation_nva7p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Fade_To_Black:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(354, -53)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HBoxContainer:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(276, 547)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Label:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HBoxContainer:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ejqv5"]
+resource_name = "fade_to_black"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fade_To_Black:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(0.481102, 0.478381, 0.457705, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(354, 143)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HBoxContainer:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(276, 354)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Label:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HBoxContainer:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_i6bkg"]
+resource_name = "show_game_over"
+length = 3.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fade_To_Black:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.6, 2.2),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(354, -53), Vector2(354, 143)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HBoxContainer:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.6, 2.2),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(276, 547), Vector2(276, 354)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Label:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1.9, 2.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HBoxContainer:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1.9, 2.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nva7p"]
+_data = {
+&"RESET": SubResource("Animation_nva7p"),
+&"fade_to_black": SubResource("Animation_ejqv5"),
+&"show_game_over": SubResource("Animation_i6bkg")
+}
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e4q66"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+texture = ExtResource("7_ejqv5")
+texture_margin_left = 18.0
+texture_margin_top = 18.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+region_rect = Rect2(0, 0, 32, 32)
+
+[sub_resource type="Animation" id="Animation_mh2q4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PanelContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(689, 23)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PanelContainer:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PanelContainer:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_e4q66"]
+resource_name = "show_notification"
+length = 4.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PanelContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(740, 23), Vector2(689, 23)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PanelContainer:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PanelContainer:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25, 3.8, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../AudioStreamPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("8_e4q66")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/3/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mh2q4"]
+_data = {
+&"RESET": SubResource("Animation_mh2q4"),
+&"show_notification": SubResource("Animation_e4q66")
+}
+
+[node name="PlayerHud" type="CanvasLayer"]
+process_mode = 3
+layer = 5
+script = ExtResource("1_scv2r")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Control"]
+position = Vector2(93, 40)
+scale = Vector2(3, 3)
+texture = ExtResource("1_jvkp2")
+region_enabled = true
+region_rect = Rect2(29, 0, 34, 8)
+
+[node name="HFlowContainer" type="HFlowContainer" parent="Control"]
+layout_mode = 0
+offset_left = 42.0
+offset_top = 69.0
+offset_right = 162.0
+offset_bottom = 91.0
+scale = Vector2(2.5, 2.5)
+theme_override_constants/h_separation = 3
+theme_override_constants/v_separation = 2
+
+[node name="Heart_GUI" parent="Control/HFlowContainer" instance=ExtResource("2_mc46r")]
+layout_mode = 2
+
+[node name="Heart_GUI2" parent="Control/HFlowContainer" instance=ExtResource("2_mc46r")]
+layout_mode = 2
+
+[node name="Heart_GUI3" parent="Control/HFlowContainer" instance=ExtResource("2_mc46r")]
+layout_mode = 2
+
+[node name="Heart_GUI4" parent="Control/HFlowContainer" instance=ExtResource("2_mc46r")]
+layout_mode = 2
+
+[node name="Heart_GUI5" parent="Control/HFlowContainer" instance=ExtResource("2_mc46r")]
+layout_mode = 2
+
+[node name="Heart_GUI6" parent="Control/HFlowContainer" instance=ExtResource("2_mc46r")]
+layout_mode = 2
+
+[node name="Heart_GUI7" parent="Control/HFlowContainer" instance=ExtResource("2_mc46r")]
+layout_mode = 2
+
+[node name="Heart_GUI8" parent="Control/HFlowContainer" instance=ExtResource("2_mc46r")]
+layout_mode = 2
+
+[node name="Heart_GUI9" parent="Control/HFlowContainer" instance=ExtResource("2_mc46r")]
+layout_mode = 2
+
+[node name="Heart_GUI10" parent="Control/HFlowContainer" instance=ExtResource("2_mc46r")]
+layout_mode = 2
+
+[node name="Heart_GUI11" parent="Control/HFlowContainer" instance=ExtResource("2_mc46r")]
+layout_mode = 2
+
+[node name="Heart_GUI12" parent="Control/HFlowContainer" instance=ExtResource("2_mc46r")]
+layout_mode = 2
+
+[node name="Heart_GUI13" parent="Control/HFlowContainer" instance=ExtResource("2_mc46r")]
+layout_mode = 2
+
+[node name="Heart_GUI14" parent="Control/HFlowContainer" instance=ExtResource("2_mc46r")]
+layout_mode = 2
+
+[node name="Heart_GUI15" parent="Control/HFlowContainer" instance=ExtResource("2_mc46r")]
+layout_mode = 2
+
+[node name="Heart_GUI16" parent="Control/HFlowContainer" instance=ExtResource("2_mc46r")]
+layout_mode = 2
+
+[node name="Heart_GUI17" parent="Control/HFlowContainer" instance=ExtResource("2_mc46r")]
+layout_mode = 2
+
+[node name="Heart_GUI18" parent="Control/HFlowContainer" instance=ExtResource("2_mc46r")]
+layout_mode = 2
+
+[node name="Heart_GUI19" parent="Control/HFlowContainer" instance=ExtResource("2_mc46r")]
+layout_mode = 2
+
+[node name="Heart_GUI20" parent="Control/HFlowContainer" instance=ExtResource("2_mc46r")]
+layout_mode = 2
+
+[node name="Abilities" type="Control" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = 461.0
+offset_right = -920.0
+offset_bottom = -79.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Abilities_Hud_Container" type="HBoxContainer" parent="Control/Abilities"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 7.0
+offset_right = 108.0
+offset_bottom = 31.0
+scale = Vector2(1.8, 1.8)
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Control/Abilities/Abilities_Hud_Container"]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_q2544")
+
+[node name="TextureRect" type="TextureRect" parent="Control/Abilities/Abilities_Hud_Container/TextureRect"]
+layout_mode = 0
+offset_right = 24.0
+offset_bottom = 24.0
+texture = SubResource("AtlasTexture_rts5x")
+stretch_mode = 3
+
+[node name="TextureRect2" type="TextureRect" parent="Control/Abilities/Abilities_Hud_Container"]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_q2544")
+
+[node name="TextureRect" type="TextureRect" parent="Control/Abilities/Abilities_Hud_Container/TextureRect2"]
+layout_mode = 0
+offset_right = 24.0
+offset_bottom = 24.0
+texture = SubResource("AtlasTexture_q2544")
+stretch_mode = 3
+
+[node name="TextureRect3" type="TextureRect" parent="Control/Abilities/Abilities_Hud_Container"]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_q2544")
+
+[node name="TextureRect" type="TextureRect" parent="Control/Abilities/Abilities_Hud_Container/TextureRect3"]
+layout_mode = 0
+offset_right = 24.0
+offset_bottom = 24.0
+texture = SubResource("AtlasTexture_aidcj")
+stretch_mode = 3
+
+[node name="Arrow_Label" type="Label" parent="Control/Abilities/Abilities_Hud_Container/TextureRect3"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 2.1111164
+offset_top = 17.777771
+offset_right = 26.111116
+offset_bottom = 33.77777
+scale = Vector2(0.8, 0.8)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+text = "999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect4" type="TextureRect" parent="Control/Abilities/Abilities_Hud_Container"]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_q2544")
+
+[node name="TextureRect" type="TextureRect" parent="Control/Abilities/Abilities_Hud_Container/TextureRect4"]
+layout_mode = 0
+offset_right = 24.0
+offset_bottom = 24.0
+texture = SubResource("AtlasTexture_se01d")
+stretch_mode = 3
+
+[node name="Bomb_Label" type="Label" parent="Control/Abilities/Abilities_Hud_Container/TextureRect4"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 2.1111164
+offset_top = 17.777771
+offset_right = 26.111116
+offset_bottom = 33.77777
+scale = Vector2(0.8, 0.8)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+text = "999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Boss_HP" type="Control" parent="Control"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -99.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Control/Boss_HP"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -225.0
+offset_top = -7.0
+offset_right = 225.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 43.0
+nine_patch_stretch = true
+texture_under = SubResource("AtlasTexture_ejqv5")
+texture_progress = SubResource("AtlasTexture_e4q66")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Control/Boss_HP"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -233.0
+offset_top = -16.0
+offset_right = 234.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_nva7p")
+region_rect = Rect2(0, 0, 64, 30)
+patch_margin_left = 27
+patch_margin_right = 27
+axis_stretch_horizontal = 1
+
+[node name="Label" type="Label" parent="Control/Boss_HP"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -36.0
+offset_top = 7.0
+offset_right = 36.0
+offset_bottom = 31.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 24
+text = "老巫师"
+horizontal_alignment = 1
+
+[node name="Game_Over" type="Control" parent="Control"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control/Game_Over"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0708287, 0.0708287, 0.0708287, 0.882353)
+
+[node name="Label" type="Label" parent="Control/Game_Over"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -126.0
+offset_top = -53.0
+offset_right = 146.0
+offset_bottom = -5.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.624572, 0.567565, 1)
+theme_override_fonts/font = SubResource("FontVariation_nva7p")
+theme_override_font_sizes/font_size = 48
+text = "你失败了"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Game_Over"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -204.0
+offset_top = 7.0
+offset_right = 204.0
+offset_bottom = 51.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="Countinue" type="Button" parent="Control/Game_Over/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_yif53")
+text = " 从存档继续 "
+
+[node name="Back_Title" type="Button" parent="Control/Game_Over/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_yif53")
+text = " 返回主标题 "
+
+[node name="Fade_To_Black" type="ColorRect" parent="Control/Game_Over"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.0957401, 0.0957401, 0.0957401, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Game_Over"]
+libraries = {
+&"": SubResource("AnimationLibrary_nva7p")
+}
+
+[node name="Notification" type="Control" parent="Control"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -319.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("7_mh2q4")
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/Notification"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 209.0
+offset_top = 23.0
+offset_right = 453.0
+offset_bottom = 91.0
+grow_horizontal = 2
+pivot_offset = Vector2(122, 0)
+theme_override_styles/panel = SubResource("StyleBoxTexture_e4q66")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Notification/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Label" type="Label" parent="Control/Notification/PanelContainer/VBoxContainer"]
+modulate = Color(0.81347436, 0.9164872, 0.43034276, 1)
+custom_minimum_size = Vector2(220, 16)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.3)
+text = "通知类型"
+autowrap_mode = 2
+text_overrun_behavior = 3
+
+[node name="Label2" type="Label" parent="Control/Notification/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(220, 16)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.3)
+text = "通知消息文本"
+autowrap_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Notification"]
+libraries = {
+&"": SubResource("AnimationLibrary_mh2q4")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+bus = &"SFX"

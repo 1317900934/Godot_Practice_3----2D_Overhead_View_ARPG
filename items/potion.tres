@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Item_Data" load_steps=8 format=3 uid="uid://j1rwvjw765jn"]
+
+[ext_resource type="Script" uid="uid://c4ouypvcghhlq" path="res://items/scripts/item_data.gd" id="1_70df6"]
+[ext_resource type="Script" uid="uid://6ifj5w0064nr" path="res://items/item_effects/item_effect.gd" id="1_hxf14"]
+[ext_resource type="Texture2D" uid="uid://bgatt5hvh7p7q" path="res://assets/graphic/items.png" id="2_8h85v"]
+[ext_resource type="Script" uid="uid://csn7m433oxoyf" path="res://items/item_effects/item_effect_heal.gd" id="2_u0y06"]
+[ext_resource type="AudioStream" uid="uid://daovee5vshhxu" path="res://assets/audio/hp-up.wav" id="3_ncbnu"]
+
+[sub_resource type="Resource" id="Resource_hxf14"]
+script = ExtResource("2_u0y06")
+heal_amount = 3
+audio = ExtResource("3_ncbnu")
+metadata/_custom_type_script = "uid://csn7m433oxoyf"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2nysy"]
+atlas = ExtResource("2_8h85v")
+region = Rect2(32, 0, 32, 32)
+
+[resource]
+script = ExtResource("1_70df6")
+name = "药水"
+description = "药，药，切克闹！
+（使用后恢复3点生命值）"
+texture = SubResource("AtlasTexture_2nysy")
+effects = Array[ExtResource("1_hxf14")]([SubResource("Resource_hxf14")])
+price = 30
+metadata/_custom_type_script = "uid://c4ouypvcghhlq"

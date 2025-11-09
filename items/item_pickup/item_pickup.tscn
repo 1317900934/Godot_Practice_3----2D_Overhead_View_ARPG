@@ -1,0 +1,129 @@
+[gd_scene load_steps=10 format=3 uid="uid://ba18nawb87xwb"]
+
+[ext_resource type="Script" uid="uid://c788iapc3lgh5" path="res://items/item_pickup/item_pickup.gd" id="1_0g51u"]
+[ext_resource type="AudioStream" uid="uid://dlb2vfendjb8e" path="res://assets/audio/item_pickup.wav" id="2_0rscd"]
+[ext_resource type="Texture2D" uid="uid://bthj5jry0n0tf" path="res://assets/graphic/Shadow.png" id="2_jl14n"]
+[ext_resource type="Texture2D" uid="uid://bgatt5hvh7p7q" path="res://assets/graphic/items.png" id="3_tc5ok"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0g51u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tc5ok"]
+atlas = ExtResource("3_tc5ok")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="Animation" id="Animation_bjvna"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shadow:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.522)]
+}
+
+[sub_resource type="Animation" id="Animation_puw1c"]
+resource_name = "default"
+length = 0.8
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.35, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(2, 2, 2, 2, 2, 2),
+"update": 0,
+"values": [Vector2(0, -6), Vector2(0, 0), Vector2(0, -3), Vector2(0, 0), Vector2(0, -1), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shadow:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.35, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(2, 2, 2, 2, 2, 2),
+"update": 0,
+"values": [Vector2(0.364354, 0.38026), Vector2(0.5, 0.522), Vector2(0.444354, 0.463754), Vector2(0.5, 0.522), Vector2(0.48, 0.48), Vector2(0.5, 0.522)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o0c3x"]
+_data = {
+&"RESET": SubResource("Animation_bjvna"),
+&"default": SubResource("Animation_puw1c")
+}
+
+[node name="Item_Pickup" type="CharacterBody2D"]
+y_sort_enabled = true
+collision_layer = 0
+collision_mask = 16
+motion_mode = 1
+script = ExtResource("1_0g51u")
+item_count = null
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, -7)
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_0g51u")
+debug_color = Color(3.36915e-07, 0.633343, 0.441519, 0.42)
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(0.0313726, 0.0313726, 0.0313726, 0.643137)
+z_index = -1
+scale = Vector2(0.5, 0.522)
+texture = ExtResource("2_jl14n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_as_relative = false
+texture = SubResource("AtlasTexture_tc5ok")
+offset = Vector2(0, -7)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7)
+shape = SubResource("CircleShape2D_0g51u")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_0rscd")
+bus = &"SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_o0c3x")
+}
+autoplay = "default"
+
+[node name="Count_Label" type="Label" parent="."]
+unique_name_in_owner = true
+z_index = 1
+offset_left = -0.99999994
+offset_top = -7.0
+offset_right = 23.0
+offset_bottom = 9.0
+scale = Vector2(0.8, 0.8)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+text = "9"
+horizontal_alignment = 1
+vertical_alignment = 1

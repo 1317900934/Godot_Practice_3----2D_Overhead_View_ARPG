@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item_Data" load_steps=4 format=3 uid="uid://jnteggeo64vp"]
+
+[ext_resource type="Script" uid="uid://6ifj5w0064nr" path="res://items/item_effects/item_effect.gd" id="1_u8wjd"]
+[ext_resource type="Script" uid="uid://c4ouypvcghhlq" path="res://items/scripts/item_data.gd" id="2_xclcp"]
+[ext_resource type="Texture2D" uid="uid://ctk4pu352sxgx" path="res://assets/quests/flute.png" id="3_xclcp"]
+
+[resource]
+script = ExtResource("2_xclcp")
+name = "小老弟的魔法笛"
+description = "小老弟丢失在洞穴内的笛子。"
+texture = ExtResource("3_xclcp")
+metadata/_custom_type_script = "uid://c4ouypvcghhlq"

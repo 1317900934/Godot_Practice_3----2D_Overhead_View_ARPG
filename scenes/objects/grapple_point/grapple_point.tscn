@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpybc8sjib7q1"]
+
+[ext_resource type="Texture2D" uid="uid://bbun6iot580nn" path="res://assets/abilities/grapple_post.png" id="1_n8o40"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n8o40"]
+radius = 3.0
+height = 14.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n8o40"]
+size = Vector2(22, 16)
+
+[node name="GrapplePoint" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -12)
+texture = ExtResource("1_n8o40")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -1)
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_n8o40")
+
+[node name="Grapple_Point" type="StaticBody2D" parent="."]
+collision_layer = 64
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Grapple_Point"]
+position = Vector2(-2.8213e-07, -8)
+rotation = -1.5707964
+shape = SubResource("RectangleShape2D_n8o40")
+debug_color = Color(0, 0.6236624, 0.53849643, 0.41960785)

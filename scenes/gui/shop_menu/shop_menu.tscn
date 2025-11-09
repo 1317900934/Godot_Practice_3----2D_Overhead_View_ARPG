@@ -1,0 +1,408 @@
+[gd_scene load_steps=13 format=3 uid="uid://cythvy1efi6bj"]
+
+[ext_resource type="Script" uid="uid://dy5f2q2ahmugs" path="res://scenes/gui/shop_menu/shop_menu.gd" id="1_2vnq1"]
+[ext_resource type="Texture2D" uid="uid://bgatt5hvh7p7q" path="res://assets/graphic/items.png" id="1_xllnm"]
+[ext_resource type="PackedScene" uid="uid://cgviu4g1phs2o" path="res://scenes/gui/shop_menu/shop_item_button.tscn" id="2_rqyda"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8puhg"]
+atlas = ExtResource("1_xllnm")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6ajqk"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+texture = SubResource("AtlasTexture_8puhg")
+texture_margin_left = 14.0
+texture_margin_top = 14.0
+texture_margin_right = 14.0
+texture_margin_bottom = 14.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rqyda"]
+atlas = ExtResource("1_xllnm")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="Animation" id="Animation_xllnm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(742, 42)]
+}
+
+[sub_resource type="Animation" id="Animation_rqyda"]
+resource_name = "not_enough_gems"
+length = 0.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(-2, -2, -2, -2, -2),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.9803795, 0.4223272, 0.26068446, 1), Color(1, 1, 1, 1), Color(0.9803795, 0.4223272, 0.26068446, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(-2, -2, -2, -2, -2, -2),
+"update": 0,
+"values": [Vector2(742, 42), Vector2(732, 42), Vector2(752, 42), Vector2(732, 42), Vector2(752, 42), Vector2(742, 42)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2vnq1"]
+_data = {
+&"RESET": SubResource("Animation_xllnm"),
+&"not_enough_gems": SubResource("Animation_rqyda")
+}
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rqyda"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+texture = SubResource("AtlasTexture_8puhg")
+texture_margin_left = 14.0
+texture_margin_top = 14.0
+texture_margin_right = 14.0
+texture_margin_bottom = 14.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7xte6"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="Theme" id="Theme_rqyda"]
+Button/styles/disabled = SubResource("StyleBoxFlat_7xte6")
+
+[node name="ShopMenu" type="CanvasLayer"]
+script = ExtResource("1_2vnq1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.19607843, 0.19607843, 0.19607843, 0.9411765)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Player_Gems" type="PanelContainer" parent="Control"]
+self_modulate = Color(0.07768298, 0.748259, 2.871701, 1)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -218.0
+offset_top = 42.0
+offset_right = -112.0
+offset_bottom = 84.00029
+grow_horizontal = 0
+scale = Vector2(1.5, 1.5)
+theme_override_styles/panel = SubResource("StyleBoxTexture_6ajqk")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Player_Gems"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="Control" type="Control" parent="Control/Player_Gems/HBoxContainer"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/Player_Gems/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_rqyda")
+stretch_mode = 3
+
+[node name="Gems_Label" type="Label" parent="Control/Player_Gems/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control2" type="Control" parent="Control/Player_Gems/HBoxContainer"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Player_Gems"]
+libraries = {
+&"": SubResource("AnimationLibrary_2vnq1")
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control"]
+layout_mode = 0
+offset_left = 79.0
+offset_top = 118.0
+offset_right = 495.0
+offset_bottom = 456.0
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Shop_Item_Container" type="VBoxContainer" parent="Control/ScrollContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Shop_Item_Button" parent="Control/ScrollContainer/MarginContainer/Shop_Item_Container" instance=ExtResource("2_rqyda")]
+layout_mode = 2
+
+[node name="Shop_Item_Button2" parent="Control/ScrollContainer/MarginContainer/Shop_Item_Container" instance=ExtResource("2_rqyda")]
+layout_mode = 2
+
+[node name="Shop_Item_Button3" parent="Control/ScrollContainer/MarginContainer/Shop_Item_Container" instance=ExtResource("2_rqyda")]
+layout_mode = 2
+
+[node name="Shop_Item_Button4" parent="Control/ScrollContainer/MarginContainer/Shop_Item_Container" instance=ExtResource("2_rqyda")]
+layout_mode = 2
+
+[node name="Shop_Item_Button5" parent="Control/ScrollContainer/MarginContainer/Shop_Item_Container" instance=ExtResource("2_rqyda")]
+layout_mode = 2
+
+[node name="Shop_Item_Button6" parent="Control/ScrollContainer/MarginContainer/Shop_Item_Container" instance=ExtResource("2_rqyda")]
+layout_mode = 2
+
+[node name="Shop_Item_Button7" parent="Control/ScrollContainer/MarginContainer/Shop_Item_Container" instance=ExtResource("2_rqyda")]
+layout_mode = 2
+
+[node name="Details_UI" type="PanelContainer" parent="Control"]
+self_modulate = Color(0.07768298, 0.748259, 2.871701, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.019
+offset_left = 526.0
+offset_top = 118.0
+offset_right = -235.11108
+offset_bottom = -252.81555
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.8, 1.8)
+theme_override_styles/panel = SubResource("StyleBoxTexture_rqyda")
+
+[node name="Control" type="Control" parent="Control/Details_UI"]
+layout_mode = 2
+
+[node name="Item_Image" type="TextureRect" parent="Control/Details_UI/Control"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 20.555557
+offset_top = 8.333334
+offset_right = 52.555557
+offset_bottom = 40.333336
+texture = SubResource("AtlasTexture_rqyda")
+stretch_mode = 3
+
+[node name="Item_Name" type="Label" parent="Control/Details_UI/Control"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 11.883298
+offset_top = 62.777782
+offset_right = 165.96362
+offset_bottom = 78.77779
+scale = Vector2(0.9, 0.9)
+theme_override_font_sizes/font_size = 16
+text = "商品标题商品标题"
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Price_Label" type="Label" parent="Control/Details_UI/Control"]
+layout_mode = 0
+offset_left = 73.88888
+offset_top = 6.6666765
+offset_right = 131.03172
+offset_bottom = 32.063496
+scale = Vector2(0.7, 0.7)
+theme_override_colors/font_color = Color(0.74314, 0.74314, 0.74314, 1)
+theme_override_constants/line_spacing = 8
+theme_override_constants/paragraph_spacing = 8
+text = "价格："
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+clip_text = true
+text_overrun_behavior = 4
+
+[node name="Item_Price" type="Label" parent="Control/Details_UI/Control"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 113.88887
+offset_top = 6.666668
+offset_right = 183.73018
+offset_bottom = 32.063488
+scale = Vector2(0.7, 0.7)
+theme_override_constants/line_spacing = 8
+theme_override_constants/paragraph_spacing = 8
+text = "99999"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+clip_text = true
+text_overrun_behavior = 4
+
+[node name="Inventory_Count_Label" type="Label" parent="Control/Details_UI/Control"]
+layout_mode = 0
+offset_left = 67.77777
+offset_top = 28.333334
+offset_right = 140.79364
+offset_bottom = 53.73016
+scale = Vector2(0.7, 0.7)
+theme_override_colors/font_color = Color(0.74314, 0.74314, 0.74314, 1)
+theme_override_constants/line_spacing = 8
+theme_override_constants/paragraph_spacing = 8
+text = "已拥有："
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Inventory_Count" type="Label" parent="Control/Details_UI/Control"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 112.22221
+offset_top = 28.333334
+offset_right = 185.23808
+offset_bottom = 53.73016
+scale = Vector2(0.7, 0.7)
+theme_override_constants/line_spacing = 8
+theme_override_constants/paragraph_spacing = 8
+text = "99999"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Item_Description" type="Label" parent="Control/Details_UI/Control"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 8.888877
+offset_top = 83.88889
+offset_right = 258.46155
+offset_bottom = 191.5812
+scale = Vector2(0.65, 0.65)
+theme_override_colors/font_color = Color(0.6226043, 0.6226048, 0.62260467, 1)
+theme_override_constants/line_spacing = 8
+theme_override_constants/paragraph_spacing = 8
+text = "商品描述商品描述商品描述商品描述商品描述商品描述商品描述商品描述商品描述商品描述商品描述商品描述商品描述商品描述商品描述"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+clip_text = true
+text_overrun_behavior = 4
+
+[node name="ColorRect" type="ColorRect" parent="Control/Details_UI/Control"]
+layout_mode = 0
+offset_left = 2.7777643
+offset_top = 51.11111
+offset_right = 178.88892
+offset_bottom = 52.222225
+color = Color(0.28080383, 0.28080383, 0.28080383, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="Control/Details_UI/Control"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 24.999998
+offset_right = 161.66669
+offset_bottom = 26.111113
+color = Color(0.28080383, 0.28080383, 0.28080383, 1)
+
+[node name="Close_UI" type="PanelContainer" parent="Control"]
+self_modulate = Color(0.07768298, 0.748259, 2.871701, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.019
+offset_left = 737.0
+offset_top = 453.0
+offset_right = -117.0
+offset_bottom = -58.26001
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+theme_override_styles/panel = SubResource("StyleBoxTexture_6ajqk")
+
+[node name="Close" type="Button" parent="Control/Close_UI"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = SubResource("Theme_rqyda")
+text = "退出商店"
+
+[node name="Buy_UI" type="PanelContainer" parent="Control"]
+self_modulate = Color(0.07768298, 0.748259, 2.871701, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.019
+offset_left = 514.0
+offset_top = 453.0
+offset_right = -340.0
+offset_bottom = -58.26001
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+theme_override_styles/panel = SubResource("StyleBoxTexture_6ajqk")
+
+[node name="Buy" type="Button" parent="Control/Buy_UI"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = SubResource("Theme_rqyda")
+text = "购买"
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -96.0
+offset_top = 49.0
+offset_right = 96.0
+offset_bottom = 81.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "神秘“人”的商店"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+max_polyphony = 3
+bus = &"SFX"

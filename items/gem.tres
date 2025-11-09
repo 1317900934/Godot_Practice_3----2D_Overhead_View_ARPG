@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Item_Data" load_steps=5 format=3 uid="uid://b8eu7po5wx45m"]
+
+[ext_resource type="Script" uid="uid://6ifj5w0064nr" path="res://items/item_effects/item_effect.gd" id="1_gbvxt"]
+[ext_resource type="Script" uid="uid://c4ouypvcghhlq" path="res://items/scripts/item_data.gd" id="1_m7x72"]
+[ext_resource type="Texture2D" uid="uid://bgatt5hvh7p7q" path="res://assets/graphic/items.png" id="2_o2n4o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gbvxt"]
+atlas = ExtResource("2_o2n4o")
+region = Rect2(0, 0, 32, 32)
+
+[resource]
+script = ExtResource("1_m7x72")
+name = "翡翠宝石"
+description = "珍贵的绿色宝石，可以作为货币与商人进行交易。"
+texture = SubResource("AtlasTexture_gbvxt")
+price = 1
+metadata/_custom_type_script = "uid://c4ouypvcghhlq"

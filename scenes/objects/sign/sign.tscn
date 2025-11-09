@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://18lm7qh66vqr"]
+
+[ext_resource type="Texture2D" uid="uid://3h5lwxa84a1k" path="res://assets/sign.png" id="1_77xav"]
+[ext_resource type="Script" uid="uid://g5dh83mrneud" path="res://scenes/objects/sign/sign.gd" id="1_m8n5n"]
+
+[sub_resource type="Gradient" id="Gradient_77xav"]
+offsets = PackedFloat32Array(0.16080402, 0.3517588)
+colors = PackedColorArray(0.12835406, 0.12835406, 0.12835406, 0.804, 0.085251264, 0.08525125, 0.085251234, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ncms7"]
+gradient = SubResource("Gradient_77xav")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_77xav"]
+radius = 4.0
+height = 14.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ncms7"]
+size = Vector2(62.406075, 57.853806)
+
+[node name="Sign" type="Node2D"]
+script = ExtResource("1_m8n5n")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+position = Vector2(0, 1)
+scale = Vector2(1, 0.34375003)
+texture = SubResource("GradientTexture2D_ncms7")
+
+[node name="Sign_Item" type="Sprite2D" parent="."]
+position = Vector2(0, -15)
+texture = ExtResource("1_77xav")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -3)
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_77xav")
+
+[node name="Interact" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interact"]
+z_index = 100
+position = Vector2(0, -5.5000005)
+scale = Vector2(0.993493, 0.985242)
+shape = SubResource("RectangleShape2D_ncms7")
+debug_color = Color(0.008, 0.475, 0.617, 0.089)
