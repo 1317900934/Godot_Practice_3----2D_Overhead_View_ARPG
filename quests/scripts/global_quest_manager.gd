@@ -6,7 +6,9 @@ signal quest_updated(q)
 
 
 # 所有任务的存放位置
-const QUEST_DATA_LOCATION: String = "res://quests"
+const QUEST_DATA_LOCATION: String = "res://quests/"
+
+
 
 
 # 游戏中的所有任务
@@ -43,7 +45,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 		
 		
-		print("任务：", current_quests)
+		#print("任务：", current_quests)
+		
+		pass
 		
 
 
@@ -54,20 +58,29 @@ func _unhandled_input(event: InputEvent) -> void:
 
 # 收集所有任务数据
 func gather_quests_data():
+	
 	# 获取不含文件夹的所有文件名，收集为一个字符串数组
 	var quest_files: PackedStringArray = DirAccess.get_files_at(QUEST_DATA_LOCATION)
-	# 存储任务目录前先清空原数组
+	
+	# 存储任务目录前先清空一次任务数组
 	quests.clear()
 	
-	# 添加所有任务到数组（过滤.remap文件）
+	# 添加所有任务到数组
 	for q in quest_files:
-		# 跳过后缀名不是tres的文件
-		if not q.ends_with(".tres"):
-			continue
-		# 加载有效的资源文件
-		var quest = load(QUEST_DATA_LOCATION + "/" + q)
+		
+		var file_name: String = QUEST_DATA_LOCATION + q.get_basename()
+		
+		if not file_name.ends_with(".tres"):
+			file_name += ".tres"
+		
+		
+		# 加载任务资源文件
+		var quest = load(file_name)
+		
+		
 		if quest is Quest:
 			quests.append(quest)
+	
 	
 	print("系统任务数量：", quests.size())
 
