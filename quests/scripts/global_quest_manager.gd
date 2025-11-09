@@ -58,8 +58,13 @@ func gather_quests_data():
 	var quest_files: PackedStringArray = DirAccess.get_files_at(QUEST_DATA_LOCATION)
 	# 存储任务目录前先清空原数组
 	quests.clear()
-	# 添加所有任务到数组
+	
+	# 添加所有任务到数组（过滤.remap文件）
 	for q in quest_files:
+		# 跳过后缀名不是tres的文件
+		if not q.ends_with(".tres"):
+			continue
+		# 加载有效的资源文件
 		var quest = load(QUEST_DATA_LOCATION + "/" + q)
 		if quest is Quest:
 			quests.append(quest)
